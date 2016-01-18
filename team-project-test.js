@@ -46,13 +46,21 @@ function getRandomCard(stack) {
 }
 
 function chooseTarget(player, players) {
-    var targetsSorted = players.slice();
-    targetsSorted.sort(function(p) {
-        return p.points;
-    });
-    for (var i = 0; i < targetsSorted.length; i++) {
-        if(targetsSorted[i].isAlive && !targetsSorted[i].isProtected && targetsSorted[i] !== player) {
-            return targetsSorted[i];
+    var indexOfAttacker = arrayObjectIndexOf(players, player);
+    for (var i = 0; i < players.length; i++) {
+        if(i == indexOfAttacker || !players[i].isAlive || players[i].isProtected) {
+            continue;
+        } else if(players[i].points >= player.points) {
+            return players[i];
+        }
+    }
+
+    // if no one has more points
+    for (var i = 0; i < players.length; i++) {
+        if(i == indexOfAttacker || !players[i].isAlive || players[i].isProtected) {
+            continue;
+        } else {
+            return players[i];
         }
     }
 }
@@ -134,44 +142,51 @@ function processRound(players) {
         // check for something wrong with hand count
         if(currentPlayer.hand.length > 2) {
             console.log('too many cards exception har-har');
-            return false;
         } else if(currentPlayer.hand.length <= 0) {
             console.log('not enough cards exception, wat?');
-            return false;
         }
 
         // choose target and card
         var targetPlayer = chooseTarget(currentPlayer, players);
+
         var cardToPlay = chooseCardToPlay(currentPlayer, targetPlayer);
         currentPlayer.hand.splice(currentPlayer.hand.indexOf(cardToPlay), 1);
         currentPlayer.discardPile.push(cardToPlay);
         updateEnemyHandInfo(cardToPlay, currentPlayer, players);
 
         // log user turn
-        console.log('--> ' + currentPlayer.name + ' plays ' + cardToPlay.name + ' against ' + targetPlayer.name);
+        if(targetPlayer == undefined) {
+            console.log(currentPlayer.name + ' has no effective action, discards ' + cardToPlay.name);
+        } else {
+            console.log('--> ' + currentPlayer.name + ' plays ' + cardToPlay.name + ' against ' + targetPlayer.name);
 
-        // process card effect
-        switch(cardToPlay.value) {
-            case 1: playGuard(currentPlayer, targetPlayer); break;
-            case 2: playPriest(currentPlayer, targetPlayer); break;
-            case 3: playBaron(currentPlayer, targetPlayer); break;
-            case 4: playHandmaid(currentPlayer); break;
-            case 5: playPrince(targetPlayer, deck); break;
-            case 6: playKing(currentPlayer, targetPlayer); break;
-            case 7: playCountess(); break;
-            case 8: playPrincess(currentPlayer); break;
-            default: break;
+            // process card effect
+            switch(cardToPlay.value) {
+                case 1: playGuard(currentPlayer, targetPlayer); break;
+                case 2: playPriest(currentPlayer, targetPlayer); break;
+                case 3: playBaron(currentPlayer, targetPlayer); break;
+                case 4: playHandmaid(currentPlayer); break;
+                case 5: playPrince(targetPlayer, deck); break;
+                case 6: playKing(currentPlayer, targetPlayer); break;
+                case 7: playCountess(); break;
+                case 8: playPrincess(currentPlayer); break;
+                default: break;
+            }
         }
 
         var alivePlayers = getAlivePlayers(players);
         // check for win condition
-        if(alivePlayers.length < 2) {
-            endRound(players);
+        var winner;
+        if(alivePlayers.length === 0) {
+            console.log('everybody dead');
+            break;
+        } else if(alivePlayers.length === 1) {
+            winner = endRound(players);
             somebodyWon = true;
             break;
         } else if(deck.length == 0) {
             // add condition to use backup card
-            endRound(players); // TODO, backup card
+            winner = endRound(players); // TODO, backup card
             somebodyWon = true;
             break;
         }
@@ -181,12 +196,20 @@ function processRound(players) {
             firstPlayer = (firstPlayer + 1) % players.length;
         } while(!players[firstPlayer].isAlive);
     } while(!somebodyWon);
+
+    // reset for next round
+    players.forEach(function(p) {
+        p.isAlive = true;
+        p.hand = [];
+        p.discardPile = [];
+    });
+    deck = generateDeck();
 }
 
 function getAlivePlayers(players) {
     var alive = [];
     players.forEach(function(p) {
-        if(p.isAlive === true) {
+        if(p.isAlive) {
             alive.push(p);
         }
     });
@@ -198,19 +221,34 @@ function endRound(players) {
 
     if(alive.length == 1) {
         alive[0].points++;
+        console.log(alive[0].name + ' wins the round!\n');
+        showScore(players);
         return alive[0];
     } else if(alive.length == 0) {
         console.log('wat? no alive players on game end exception');
         return false;
     } else {
         var potentialWinners = alive.sort(function(p1, p2) {
-            return p1.hand[0].value > p2.hand[0].value;
+            if(p1.hand[0] != undefined && p2.hand[0] != undefined) {
+                return p1.hand[0].value > p2.hand[0].value;
+            }
         });
         var winner = potentialWinners[0];
         winner.points++;
         console.log(winner.name + ' wins the round!\n');
+        showScore(players);
         return winner;
     }
+}
+
+function showScore(players) {
+    var result = '';
+    players.forEach(function(p) {
+        if(p !== undefined) {
+            result += '#' + p.name + ': ' + p.points + ' pts; ';
+        }
+    });
+    console.log(result);
 }
 
 function arrayObjectIndexOf(myArray, searchTerm) {
@@ -221,32 +259,66 @@ function arrayObjectIndexOf(myArray, searchTerm) {
 }
 
 function getPossibleEnemyCards(discardPile, hand) {
-    var result = generateDeck();
-    discardPile.forEach(function(card) {
-       result.splice(result.indexOf(card), 1);
+    var deck = generateDeck();
+    discardPile.forEach(function(c) {
+        var indexOfCard = arrayObjectIndexOf(deck, c);
+        deck.splice(indexOfCard, 1);
     });
-    hand.forEach(function(card) {
-        result.splice(result.indexOf(card), 1);
+    hand.forEach(function(c) {
+        var indexOfCard = arrayObjectIndexOf(deck, c);
+        deck.splice(indexOfCard, 1);
     });
-    return result;
+    deck = deck.filter(function(e) { return e;});
+    return deck;
 }
 
 function playGuard(attacker, target) {
     var guess;
+    var discardPile = getDiscardPile(players);
+    var possibleCards = getPossibleEnemyCards(discardPile, attacker.hand);
+    var somethingWrongCounter = 0;
     do {
-        if(attacker.enemyHands[target.name] != undefined) {// && attacker.enemyHands[target.name].length > 0) {
-            guess = Math.floor(Math.random() * attacker.enemyHands[target.name].length); // random so far
-        } else {
-            var discardPile = getDiscardPile(players);
-            var possibleCards = getPossibleEnemyCards(discardPile, attacker.hand);
-            guess = Math.floor(Math.random() * possibleCards.length);
+        if(target === undefined) { // no useful action
+            console.log('no target, Guard is drunk');
+            return;
         }
 
-        if(guess == target.hand[0].value) {
-            target.isAlive = false;
-            console.log(target.name + ' is out of the round');
+        if(attacker.enemyHands[target.name] != undefined && attacker.enemyHands[target.name].length > 0) {
+            guess = Math.floor(Math.random() * (attacker.enemyHands[target.name].length - 1)); // random so far
+        } else {
+            guess = Math.floor(Math.random() * (possibleCards.length - 1));
         }
-    } while(possibleCards[guess].value !== 1);
+
+        // check if only guards are left
+        var totalGuards = 0;
+        possibleCards.forEach(function(c) {
+            if(c.value == 1) {
+                totalGuards++;
+            }
+        });
+        if(totalGuards == possibleCards.length) {
+            return;
+        }
+        if(isNaN(guess) || possibleCards[guess] == undefined) {
+            console.log('!-- guess = NaN || possibleCards[guess] == undefined');
+            return;
+        }
+
+        somethingWrongCounter++;
+        if(somethingWrongCounter > 15) {
+            possibleCards.sort(function(a, b) {
+                return a.value > b.value;
+            });
+            guess = possibleCards.length - 1;
+        }
+    } while(possibleCards[guess].value == 1);
+
+    if(guess == target.hand[0].value) {
+        target.isAlive = false;
+        console.log(target.name + ' is out of the round');
+    } else {
+        console.log(attacker.name + ' guessed ' + possibleCards[guess].name + ', not correct');
+    }
 
     return true;
 }
@@ -332,17 +404,21 @@ var player3 = new Player('Player 3');
 var player4 = new Player('Player 4');
 var players = [player1, player2, player3, player4];
 
+var roundWinner;
+var roundCounter = 1;
 do {
-    var running = processRound(players);
-    if(!running) {
+    console.log('<<< ROUND ' + roundCounter + ' >>>');
+    roundWinner = processRound(players);
+    roundCounter++;
+    if(roundWinner) {
         break;
     }
 } while(player1.points < 4 && player2.points < 4 &&
         player3.points < 4 && player4.points < 4);
 
-var winner = players.filter(function(player) {
-    return player.points == 4;
-});
+var winner = players.sort(function(a, b) {
+    return a.points > b.points;
+})[players.length - 1];
 console.log(winner.name + ' wins the game!');
 
 
