@@ -2,14 +2,21 @@
 var canvas, context;
 var deck, players, discardedPile;
 
+
 window.onload = function main() {
     canvas = document.createElement('canvas');
     canvas.setAttribute('id', 'board');
-    canvas.width = 800;
-    canvas.height = 800;
     context = canvas.getContext('2d');
-
+    canvas.width = 1220;
+    canvas.height = 800;
     document.body.appendChild(canvas);
+// Background image
+//    var bgReady = false;
+//    var bgImage = new Image();
+//    bgImage.onload = function () {
+//        bgReady = true;
+//    };
+//    bgImage.src = 'resources/background.jpg';
 
     canvas.addEventListener('mousedown', mouseDown)
 
@@ -47,20 +54,47 @@ function update() {
 
 function render() {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    for(var i = players.length(); i--;){
-        players[i].update();
-    }
-
+    //if (bgReady) {
+    //    context.drawImage(bgImage, 0, 0)
+    //}
+    //for (var i = players.length; i--;) {
+    //    //players[i].update();
+    //    players[i].hand.forEach(function (card) {
+    //        if (!card.isDrawn) {
+    //            card.isDrawn = true;
+    //            drawCard(card, players[i]);
+    //        }
+    //    });
+    //}
     // render here
+    players.forEach(function (player) {
+        player.hand.forEach(function (card) {
+            context.drawImage(card.image, player.position.x, player.position.y);
+        });
+
+    });
 }
 
 function mouseDown(evt) {
     var el = evt.target;
     var px = evt.clientX - el.offsetLeft;
     var py = evt.clientY - el.offsetTop;
+    //console.log(el.offsetLeft, el.offsetTop);
+    //console.log(px, py)
+    if (py % 120 >= 20 && py % 120 >= 20) {
+        var idx = Math.floor(px / 120);
+        idx += Math.floor(py / 120) * 3;
+        //if (players[idx].hasData()) {
+        //    return;
+        //}
+        //players[idx].hand[].flip();
 
+
+    }
 
 }
+
+// Main elements
 
 function Card(value, name, qty, description) {
     this.value = value;
@@ -68,6 +102,13 @@ function Card(value, name, qty, description) {
     this.qty = qty;
     this.picture = 'resources/cardFaces/' + this.name.toLowerCase() + '.png';
     this.description = description;
+    this.isReady = false;
+
+    this.image = new Image();
+    this.image.onload = function () {
+        this.isReady = true;
+    };
+    this.image.src = this.picture;
     //this.sound = 'resources/cardSounds/' + this.name.toLowerCase() + '.wav';
 }
 
@@ -139,13 +180,13 @@ function initializePlayers(count) {
 
 function givePlayerPositionByID(playerID) {
     if (playerID === 'Player 1') {
-        return new Position(400, 650);
+        return new Position(50, 20);
     } else if (playerID === 'Player 2') {
-        return new Position(400, 150);
+        return new Position(350, 20);
     } else if (playerID === 'Player 3') {
-        return new Position(150, 400);
+        return new Position(650, 20);
     } else {
-        return new Position(650, 400);
+        return new Position(950, 20);
     }
 }
 
@@ -161,32 +202,30 @@ function getRandomCard(stack) {
 function drawText(currentCard, context) {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     context.font = '30pt Arial';
-    context.fillStyle = getLinearGradient(context);
+    //context.fillStyle = getLinearGradient(context);
     context.fillText(currentCard.toString(), 100, 500);
 }
 
-function drawCard() {
-    if (Modernizr.canvas) {
-        var cardCanvas = document.getElementById('cardCanvas');
-        var context = cardCanvas.getContext('2d');
-
-        if (context) {
-            var currentCard = drawRandomCard();
-            if (currentCard) {
-                var currentImage = new Image();
-                currentImage.onload = function () {
-                    context.drawImage(currentImage, 0, 0, 400, 400);
-                };
-                currentImage.src = currentCard.picture;
-                //playSound(currentCard.sound);
-                drawText(currentCard, context);
-                //alert(currentCard.toString());
-            }
-        }
-    } else {
-        alert('Canvas is not supported');
-    }
-}
+//function drawCard(currentCard, player) {
+//    if (Modernizr.canvas) {
+//          if (context) {
+//            //var currentCard = drawRandomCard();
+//            if (currentCard) {
+//                var currentImage = new Image();
+//                currentImage.onload = function () {
+//
+//                    ctx.drawImage(currentImage, 0, 0, 157, 114);
+//                };
+//                currentImage.src = currentCard.picture;
+//                //playSound(currentCard.sound);
+//                drawText(currentCard, ctx);
+//                //alert(currentCard.toString());
+//            }
+//        }
+//    } else {
+//        alert('Canvas is not supported');
+//    }
+//}
 
 //function playSound(soundResource) {
 //    if (soundResource) {
