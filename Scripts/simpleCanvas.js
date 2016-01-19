@@ -105,6 +105,7 @@ function Card(value, name, qty, description) {
     this.isReady = false;
 
     this.image = new Image();
+    // this is not ok
     this.image.onload = function () {
         this.isReady = true;
     };
@@ -182,11 +183,11 @@ function givePlayerPositionByID(playerID) {
     if (playerID === 'Player 1') {
         return new Position(50, 20);
     } else if (playerID === 'Player 2') {
-        return new Position(350, 20);
+        return new Position(330, 20);
     } else if (playerID === 'Player 3') {
-        return new Position(650, 20);
+        return new Position(610, 20);
     } else {
-        return new Position(950, 20);
+        return new Position(890, 20);
     }
 }
 

@@ -18,7 +18,7 @@ canvas {
     right: 0;
 }
 
-#board {
+#myCanvas {
     position: absolute;
     background: url("../../resources/background.jpg");
     background-size: 30%;
