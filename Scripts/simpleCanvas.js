@@ -61,6 +61,7 @@ var offset;
 var update;
 var deck, players;
 var backupCard;
+var container;
 
 
 window.onload = function main() {
@@ -76,6 +77,7 @@ function init() {
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
     document.body.appendChild(canvas);
+    container = new createjs.Container();
 
     //Create stage
     stage = new createjs.Stage(canvas);
@@ -133,9 +135,9 @@ function Card(value, name, description, owner, position) {
     this.description = description;
     this.owner = owner;
     this.position = position;
-    this.image = null;
-    this.previousArrayIndex = null;
-    this.isHovered = false;
+    //this.image = null;
+    //this.previousArrayIndex = null;
+    //this.isHovered = false;
 }
 
 Card.prototype.toString = function () {
@@ -150,15 +152,12 @@ function addCardToBoard(card) {
         console.log(event.target);
         var image = event.target;
         handleImageLoad(image, card);
-    };//handleImageLoad('onload', card);//('onload', card);
+    };
 }
 
 function handleImageLoad(image, card) { //card
-    //console.log(event.target);
-    //var image = event.target;
     var bitmap;
 
-    var container = new createjs.Container();
     stage.addChild(container);
     bitmap = new createjs.Bitmap(image);
     container.addChild(bitmap);
@@ -172,21 +171,23 @@ function handleImageLoad(image, card) { //card
     bitmap.on('mousedown', function (evt) {
         this.parent.addChild(this);
         this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
+
+
     });
 
     bitmap.on('rollover', function (evt) {
-        stage.setChildIndex(stage.getNumChildren() - 1);
+        this.parent.addChild(this);
         this.scaleX = this.scaleY = this.scale * 1.2;
-        this.card.isHovered = true;
+        //this.card.isHovered = true;
         update = true;
 
     });
-    bitmap.card = card;
-    card.image = bitmap;
+    //bitmap.card = card;
+    //card.image = bitmap;
 
     bitmap.on('rollout', function (evt) {
         this.scaleX = this.scaleY = this.scale;
-        this.card.isHovered = false;
+        //this.card.isHovered = false;
         update = true;
     });
 
