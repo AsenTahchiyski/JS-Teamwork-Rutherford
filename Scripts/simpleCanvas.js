@@ -1,121 +1,189 @@
-//(function () {
-var canvas, context;
-var deck, players, discardedPile;
+// Constants
+var WIDTH = 1220;
+var HEIGHT = 800;
+var OWNERS = {
+    DECK: 'Deck',
+    PLAYER_1: 'Player_1',
+    PLAYER_2: 'Player_2',
+    PLAYER_3: 'Player_3',
+    PLAYER_4: 'Player_4',
+    BACKUP_CARD: 'Backup_card'
+};
+var CARDS = {
+    GUARD: {
+        name: 'Guard',
+        value: 1,
+        quantity: 5,
+        description: 'Name a non-Guard card and choose another player. If that player has that card, he or she is out of the round.'
+    },
+    PRIEST: {
+        name: 'Priest',
+        value: 2,
+        quantity: 2,
+        description: 'Look at another player\'s hand.'
+    },
+    BARON: {
+        name: 'Baron',
+        value: 3,
+        quantity: 2,
+        description: 'You and another player secretly compare hands. The player with the lower value is out of the round.'
+    },
+    HANDMAID: {
+        name: 'Handmaid',
+        value: 4,
+        quantity: 2,
+        description: 'Until your next turn, ignore all effects from other players\' actions.'
+    },
+    PRINCE: {
+        name: 'Prince',
+        value: 5,
+        quantity: 2,
+        description: 'Choose any player (including yourself) to discard his or her hand and draw a new card.'
+    },
+    KING: {value: 6, quantity: 1, description: 'Trade hands with another player of your choice.'},
+    COUNTESS: {
+        name: 'Countess',
+        value: 7,
+        quantity: 1,
+        description: 'If you have this card and the King or Prince in your hand, you must discard this card.'
+    },
+    PRINCESS: {
+        name: 'Princess',
+        value: 8,
+        quantity: 1,
+        description: 'If you discard this card, you are out of the round.'
+    }
+};
+
+var canvas, stage;
+var mouseTarget;
+var offset;
+var update;
+var deck, players;
+var backupCard;
 
 
 window.onload = function main() {
-    canvas = document.createElement('canvas');
-    canvas.setAttribute('id', 'board');
-    context = canvas.getContext('2d');
-    canvas.width = 1220;
-    canvas.height = 800;
-    document.body.appendChild(canvas);
-// Background image
-//    var bgReady = false;
-//    var bgImage = new Image();
-//    bgImage.onload = function () {
-//        bgReady = true;
-//    };
-//    bgImage.src = 'resources/background.jpg';
-
-    canvas.addEventListener('mousedown', mouseDown)
-
     init();
     tick();
 };
 
 // Initialization of game
 function init() {
+    // Create canvas on document
+    canvas = document.createElement('canvas');
+    canvas.setAttribute('id', 'myCanvas');
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
+    document.body.appendChild(canvas);
+
+    //Create stage
+    stage = new createjs.Stage(canvas);
+
+    //Enable mouse over event
+    stage.enableMouseOver(10);
+
+    // Initialize deck - generate all 16 cards and shuffle them
     if (deck == null) {
         deck = shuffleDeck(generateDeck());
     }
 
+    // Initialize players
     if (players == null) {
         var count = 4; // to be edited
         players = initializePlayers(count);
     }
 
-    this.discardedPile = [];
-    this.discardedPile.push(getCardFromDeck());
-    // initializations here
-}
+    // Draw backup card - random card from deck
+    backupCard = (getRandomCard(deck));
+    backupCard.owner = OWNERS.BACKUP_CARD;
 
-function tick() {
-    window.requestAnimationFrame(tick);
-
-    update();
     render();
 }
 
-function update() {
-    // Other updates here
-    //checkForWinner();
+function stop() {
+    createjs.Ticker.removeEventListener('tick', tick);
 }
 
+function getRandomCard(stack) {
+    var cardIndex = Math.floor(Math.random() * stack.length);
+    var card = stack[cardIndex];
+    stack.splice(cardIndex, 1);
+    return card;
+}
+
+
 function render() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    //if (bgReady) {
-    //    context.drawImage(bgImage, 0, 0)
-    //}
-    //for (var i = players.length; i--;) {
-    //    //players[i].update();
-    //    players[i].hand.forEach(function (card) {
-    //        if (!card.isDrawn) {
-    //            card.isDrawn = true;
-    //            drawCard(card, players[i]);
-    //        }
-    //    });
-    //}
-    // render here
     players.forEach(function (player) {
-        player.hand.forEach(function (card) {
-            context.drawImage(card.image, player.position.x, player.position.y);
-        });
+        for (var i = 0; i < player.hand.length; i++) {
+            player.hand[i].position.x += i * 50;
+            addCardToBoard(player.hand[i]);
+        }
 
     });
 }
 
-function mouseDown(evt) {
-    var el = evt.target;
-    var px = evt.clientX - el.offsetLeft;
-    var py = evt.clientY - el.offsetTop;
-    //console.log(el.offsetLeft, el.offsetTop);
-    //console.log(px, py)
-    if (py % 120 >= 20 && py % 120 >= 20) {
-        var idx = Math.floor(px / 120);
-        idx += Math.floor(py / 120) * 3;
-        //if (players[idx].hasData()) {
-        //    return;
-        //}
-        //players[idx].hand[].flip();
-
-
-    }
-
-}
 
 // Main elements
-
-function Card(value, name, qty, description) {
+function Card(value, name, description, owner, position) {
     this.value = value;
     this.name = name;
-    this.qty = qty;
-    this.picture = 'resources/cardFaces/' + this.name.toLowerCase() + '.png';
     this.description = description;
-    this.isReady = false;
-
-    this.image = new Image();
-    // this is not ok
-    this.image.onload = function () {
-        this.isReady = true;
-    };
-    this.image.src = this.picture;
-    //this.sound = 'resources/cardSounds/' + this.name.toLowerCase() + '.wav';
+    this.owner = owner;
+    this.position = position;
 }
 
 Card.prototype.toString = function () {
     return '(' + this.value + ')' + this.name + ': ' + this.description;
 };
+
+function addCardToBoard(card) {
+    var picture = 'resources/cardFaces/' + card.name.toLowerCase() + '.png';
+    var image = new Image();
+    image.src = picture;
+    image.onload = handleImageLoad;//('onload', card);
+}
+
+function handleImageLoad(event) { //card
+    console.log(event.target);
+    var image = event.target;
+    var bitmap;
+
+    var container = new createjs.Container();
+    stage.addChild(container);
+    bitmap = new createjs.Bitmap(image);
+    container.addChild(bitmap);
+    bitmap.x = 0;//card.position.x;
+    bitmap.y = 0;//card.position.y;
+    bitmap.scale = 1;
+    console.log(bitmap.x, bitmap.y);
+    bitmap.name = 'card' + Math.floor(Math.random() * 100); //card.owner +
+    bitmap.cursor = 'pointer';
+    stage.update();
+    bitmap.on('mousedown', function (evt) {
+        this.parent.addChild(this);
+        this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
+    });
+
+    bitmap.on('rollover', function (evt) {
+        this.scaleX = this.scaleY = this.scale * 1.2;
+        update = true;
+    });
+
+    bitmap.on('rollout', function (evt) {
+        this.scaleX = this.scaleY = this.scale;
+        update = true;
+    });
+
+    createjs.Ticker.addEventListener('tick', tick);
+}
+
+function tick(event) {
+    if (update) {
+        update = false; // only update once
+        stage.update(event);
+    }
+}
 
 function Position(x, y) {
     this.x = x;
@@ -131,23 +199,15 @@ function Player(name) {
     this.isProtected = false;
     this.enemyHands = {};
     this.position = givePlayerPositionByID(name);
-    //console.log(position);
 }
 
 function generateDeck() {
-    var guard = new Card(1, 'Guard', 5, 'Name a non-Guard card and choose another player. If that player has that card, he or she is out of the round.');
-    var priest = new Card(2, 'Priest', 2, 'Look at another player\'s hand.', 'resources/cardFaces/priest.png');
-    var baron = new Card(3, 'Baron', 2, 'You and another player secretly compare hands. The player with the lower value is out of the round.');
-    var handmaid = new Card(4, 'Handmaid', 2, 'Until your next turn, ignore all effects from other players\' actions.');
-    var prince = new Card(5, 'Prince', 2, 'Choose any player (including yourself) to discard his or her hand and draw a new card.');
-    var king = new Card(6, 'King', 1, 'Trade hands with another player of your choice.');
-    var countess = new Card(7, 'Countess', 1, 'If you have this card and the King or Prince in your hand, you must discard this card.');
-    var princess = new Card(8, 'Princess', 1, 'If you discard this card, you are out of the round.');
-    var allCardTypes = [guard, priest, baron, handmaid, prince, king, countess, princess];
     var deck = [];
-    for (var card = 0; card < allCardTypes.length; card++) {
-        for (var i = 0; i < allCardTypes[card].qty; i++) {
-            deck.push(allCardTypes[card]);
+    for (var cardType in CARDS) {
+        var type = CARDS[cardType];
+        for (var i = 0; i < type.quantity; i++) {
+            var card = new Card(type.value, type.name, type.description, OWNERS.DECK, new Position(0, 0));
+            deck.push(card);
         }
     }
 
@@ -171,8 +231,11 @@ function shuffleDeck(deck) {
 function initializePlayers(count) {
     players = [];
     for (var i = 1; i <= count; i++) {
-        var player = new Player('Player ' + i);
-        player.hand.push(getCardFromDeck());
+        var player = new Player('Player_' + i);
+        var card = getCardFromDeck();
+        card.owner = player.name;
+        card.position = new Position(player.position.x, player.position.y);
+        player.hand.push(card);
         players.push(player);
     }
 
@@ -180,23 +243,16 @@ function initializePlayers(count) {
 }
 
 function givePlayerPositionByID(playerID) {
-    if (playerID === 'Player 1') {
+    if (playerID === 'Player_1') {
         return new Position(50, 20);
-    } else if (playerID === 'Player 2') {
+    } else if (playerID === 'Player_2') {
         return new Position(330, 20);
-    } else if (playerID === 'Player 3') {
+    } else if (playerID === 'Player_3') {
         return new Position(610, 20);
     } else {
         return new Position(890, 20);
     }
 }
-
-function getRandomCard(stack) {
-    var cardIndex = Math.floor(Math.random() * stack.length);
-    var card = stack[cardIndex];
-    stack.splice(cardIndex, 1);
-    return card;
-} // this is not used
 
 // GUI stuff
 
@@ -206,27 +262,6 @@ function drawText(currentCard, context) {
     //context.fillStyle = getLinearGradient(context);
     context.fillText(currentCard.toString(), 100, 500);
 }
-
-//function drawCard(currentCard, player) {
-//    if (Modernizr.canvas) {
-//          if (context) {
-//            //var currentCard = drawRandomCard();
-//            if (currentCard) {
-//                var currentImage = new Image();
-//                currentImage.onload = function () {
-//
-//                    ctx.drawImage(currentImage, 0, 0, 157, 114);
-//                };
-//                currentImage.src = currentCard.picture;
-//                //playSound(currentCard.sound);
-//                drawText(currentCard, ctx);
-//                //alert(currentCard.toString());
-//            }
-//        }
-//    } else {
-//        alert('Canvas is not supported');
-//    }
-//}
 
 //function playSound(soundResource) {
 //    if (soundResource) {
@@ -250,8 +285,7 @@ function getDiscardPile(players) {
 }
 
 function getCardFromDeck() {
-    var topCard = deck.pop();
-    return topCard;
+    return deck.pop();
 }
 
 function playGuard(attacker, target) {
