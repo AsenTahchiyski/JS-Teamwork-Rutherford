@@ -33,12 +33,8 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-<<<<<<< HEAD
+
 # JetBrains WebStorm configuration folder
 .idea
-=======
-.idea/*
-!.idea/workspace.xml
-!.idea/tasks.xml
-!.idea/JS-Teamwork-Rutherford.iml
->>>>>>> refs/remotes/origin/master
+
+

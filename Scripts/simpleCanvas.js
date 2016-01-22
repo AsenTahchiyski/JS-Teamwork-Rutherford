@@ -116,7 +116,9 @@ function getRandomCard(stack) {
 function render() {
     players.forEach(function (player) {
         for (var i = 0; i < player.hand.length; i++) {
-            player.hand[i].position.x += i * 50;
+            player.hand[i].position = new Position(player.position.x, player.position.y);
+            player.hand[i].position.x += i * 40;
+            player.hand[i].position.y += i * 40;
             addCardToBoard(player.hand[i]);
         }
 
@@ -131,6 +133,9 @@ function Card(value, name, description, owner, position) {
     this.description = description;
     this.owner = owner;
     this.position = position;
+    this.image = null;
+    this.previousArrayIndex = null;
+    this.isHovered = false;
 }
 
 Card.prototype.toString = function () {
@@ -141,20 +146,24 @@ function addCardToBoard(card) {
     var picture = 'resources/cardFaces/' + card.name.toLowerCase() + '.png';
     var image = new Image();
     image.src = picture;
-    image.onload = handleImageLoad;//('onload', card);
+    image.onload = function (event) {
+        console.log(event.target);
+        var image = event.target;
+        handleImageLoad(image, card);
+    };//handleImageLoad('onload', card);//('onload', card);
 }
 
-function handleImageLoad(event) { //card
-    console.log(event.target);
-    var image = event.target;
+function handleImageLoad(image, card) { //card
+    //console.log(event.target);
+    //var image = event.target;
     var bitmap;
 
     var container = new createjs.Container();
     stage.addChild(container);
     bitmap = new createjs.Bitmap(image);
     container.addChild(bitmap);
-    bitmap.x = 0;//card.position.x;
-    bitmap.y = 0;//card.position.y;
+    bitmap.x = card.position.x;
+    bitmap.y = card.position.y;
     bitmap.scale = 1;
     console.log(bitmap.x, bitmap.y);
     bitmap.name = 'card' + Math.floor(Math.random() * 100); //card.owner +
@@ -166,12 +175,18 @@ function handleImageLoad(event) { //card
     });
 
     bitmap.on('rollover', function (evt) {
+        stage.setChildIndex(stage.getNumChildren() - 1);
         this.scaleX = this.scaleY = this.scale * 1.2;
+        this.card.isHovered = true;
         update = true;
+
     });
+    bitmap.card = card;
+    card.image = bitmap;
 
     bitmap.on('rollout', function (evt) {
         this.scaleX = this.scaleY = this.scale;
+        this.card.isHovered = false;
         update = true;
     });
 
@@ -236,6 +251,15 @@ function initializePlayers(count) {
         card.owner = player.name;
         card.position = new Position(player.position.x, player.position.y);
         player.hand.push(card);
+
+        for (var j = 0; j < player.hand.length; j++) {
+            var currCard = player.hand[i];
+            if (currCard === card) {
+                card.previousArrayIndex = !!j;
+                break;
+            }
+        }
+
         players.push(player);
     }
 
