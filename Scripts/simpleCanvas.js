@@ -7,50 +7,64 @@ var OWNERS = {
     PLAYER_2: 'Player_2',
     PLAYER_3: 'Player_3',
     PLAYER_4: 'Player_4',
-    BACKUP_CARD: 'Backup_card'
+    BACKUP_CARD: 'Backup_card',
+    DISCARD: 'Discard'
 };
 var CARDS = {
     GUARD: {
         name: 'Guard',
         value: 1,
         quantity: 5,
+        picture: 'resources/cardFaces/guard.png',
         description: 'Name a non-Guard card and choose another player. If that player has that card, he or she is out of the round.'
     },
     PRIEST: {
         name: 'Priest',
         value: 2,
         quantity: 2,
+        picture: 'resources/cardFaces/priest.png',
         description: 'Look at another player\'s hand.'
     },
     BARON: {
         name: 'Baron',
         value: 3,
         quantity: 2,
+        picture: 'resources/cardFaces/baron.png',
         description: 'You and another player secretly compare hands. The player with the lower value is out of the round.'
     },
     HANDMAID: {
         name: 'Handmaid',
         value: 4,
         quantity: 2,
+        picture: 'resources/cardFaces/handmaid.png',
         description: 'Until your next turn, ignore all effects from other players\' actions.'
     },
     PRINCE: {
         name: 'Prince',
         value: 5,
         quantity: 2,
+        picture: 'resources/cardFaces/prince.png',
         description: 'Choose any player (including yourself) to discard his or her hand and draw a new card.'
     },
-    KING: {value: 6, quantity: 1, description: 'Trade hands with another player of your choice.'},
+    KING: {
+        name: 'King',
+        value: 6,
+        quantity: 1,
+        picture: 'resources/cardFaces/king.png',
+        description: 'Trade hands with another player of your choice.'
+    },
     COUNTESS: {
         name: 'Countess',
         value: 7,
         quantity: 1,
+        picture: 'resources/cardFaces/countess.png',
         description: 'If you have this card and the King or Prince in your hand, you must discard this card.'
     },
     PRINCESS: {
         name: 'Princess',
         value: 8,
         quantity: 1,
+        picture: 'resources/cardFaces/princess.png',
         description: 'If you discard this card, you are out of the round.'
     }
 };
@@ -88,6 +102,7 @@ function init() {
     // Initialize deck - generate all 16 cards and shuffle them
     if (deck == null) {
         deck = shuffleDeck(generateDeck());
+        addElementToBoard(deck);
     }
 
     // Initialize players
@@ -97,45 +112,47 @@ function init() {
     }
 
     // Draw backup card - random card from deck
-    backupCard = (getRandomCard(deck));
+    backupCard = (getRandomCard(deck.cards));
     backupCard.owner = OWNERS.BACKUP_CARD;
 
-    render();
+    renderPlayers();
 }
 
 function stop() {
     createjs.Ticker.removeEventListener('tick', tick);
 }
 
-function getRandomCard(stack) {
-    var cardIndex = Math.floor(Math.random() * stack.length);
-    var card = stack[cardIndex];
-    stack.splice(cardIndex, 1);
-    return card;
-}
 
-
-function render() {
+function renderPlayers() {
     players.forEach(function (player) {
-        for (var i = 0; i < player.hand.length; i++) {
-            player.hand[i].position = new Position(player.position.x, player.position.y);
-            player.hand[i].position.x += i * 40;
-            player.hand[i].position.y += i * 40;
-            addCardToBoard(player.hand[i]);
-        }
-
+        var i = 0;
+        player.hand.forEach(function (card) {
+            card.position = new Position(player.position.x, player.position.y);
+            card.position.x += i * 40;
+            card.position.y += i * 40;
+            addElementToBoard(card);
+            i++;
+        });
     });
 }
 
+function tick(event) {
+    if (update) {
+        update = false; // only update once
+        stage.update(event);
+    }
+}
 
 // Main elements
+
+//Card stuff
 function Card(value, name, description, owner, position) {
     this.value = value;
     this.name = name;
     this.description = description;
     this.owner = owner;
     this.position = position;
-    //this.image = null;
+    this.image = null;
     //this.previousArrayIndex = null;
     //this.isHovered = false;
 }
@@ -144,45 +161,50 @@ Card.prototype.toString = function () {
     return '(' + this.value + ')' + this.name + ': ' + this.description;
 };
 
-function addCardToBoard(card) {
-    var picture = 'resources/cardFaces/' + card.name.toLowerCase() + '.png';
+function addElementToBoard(object) {
+    var picture = object.image;
     var image = new Image();
     image.src = picture;
     image.onload = function (event) {
-        console.log(event.target);
         var image = event.target;
-        handleImageLoad(image, card);
+        handleImageLoad(image, object);
     };
 }
 
-function handleImageLoad(image, card) { //card
+function handleImageLoad(image, object) { //card
     var bitmap;
-
     stage.addChild(container);
     bitmap = new createjs.Bitmap(image);
     container.addChild(bitmap);
-    bitmap.x = card.position.x;
-    bitmap.y = card.position.y;
+    bitmap.x = object.position.x;
+    bitmap.y = object.position.y;
     bitmap.scale = 1;
-    console.log(bitmap.x, bitmap.y);
-    bitmap.name = 'card' + Math.floor(Math.random() * 100); //card.owner +
+    bitmap.name = 'object' + Math.floor(Math.random() * 100);
     bitmap.cursor = 'pointer';
     stage.update();
+    bitmap.object = object;
     bitmap.on('mousedown', function (evt) {
         this.parent.addChild(this);
         this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
-
-
+        if (object instanceof Deck) {
+            playerDrawCard(players[0]);
+            if(object.cards.length===0){
+                container.removeChild(this);
+            }
+        } else {
+            handlePlayerPlayCard(this.object);
+            container.removeChild(this);
+        }
+        update = true;
     });
-
     bitmap.on('rollover', function (evt) {
+
         this.parent.addChild(this);
-        this.scaleX = this.scaleY = this.scale * 1.2;
-        //this.card.isHovered = true;
+        this.scaleX = this.scaleY = this.scale * 1.1;
         update = true;
 
     });
-    //bitmap.card = card;
+
     //card.image = bitmap;
 
     bitmap.on('rollout', function (evt) {
@@ -194,18 +216,91 @@ function handleImageLoad(image, card) { //card
     createjs.Ticker.addEventListener('tick', tick);
 }
 
-function tick(event) {
-    if (update) {
-        update = false; // only update once
-        stage.update(event);
+function handlePlayerPlayCard(card) {
+    // Remove card from player hand and add it to discard pile
+    var playerIndex = card.owner.slice(-1) - 1;
+    console.log(players[playerIndex]);
+    var indexOfCard = 0;
+    while (true) {
+        if (players[playerIndex].hand[indexOfCard] === card) {
+            players[playerIndex].hand.splice(indexOfCard, 1);
+            console.log(players[playerIndex].hand);
+            card.owner = OWNERS.DISCARD;
+            players[playerIndex].discardPile.push(card);
+            break;
+        }
+        indexOfCard++;
     }
+
+    // Activate card effect
+    //if (card.name === 'Guard') {
+    //    playGuard();
+    //} else if (card.name === 'Priest') {
+    //    playPriest();
+    //} else if (card.name === 'Handmaid') {
+    //    playHandmaid();
+    //} else if (card.name === 'Prince') {
+    //    playPrince();
+    //} else if (card.name === 'King') {
+    //    playKing();
+    //} else if (card.name === 'Countess') {
+    //    playCountess();
+    //} else if (card.name === 'Princess') {
+    //    playPrincess();
+    //} else {
+    //}
 }
 
-function Position(x, y) {
-    this.x = x;
-    this.y = y;
+// Deck stuff
+function Deck(cards, position) {
+    this.cards = cards;
+    this.position = position;
+    this.image = null;
 }
 
+function generateDeck() {
+    var deckCards = [];
+    for (var cardType in CARDS) {
+        var type = CARDS[cardType];
+        for (var i = 0; i < type.quantity; i++) {
+            var card = new Card(type.value, type.name, type.description, OWNERS.DECK, new Position(0, 0));
+            card.image = type.picture;
+            deckCards.push(card);
+        }
+    }
+    var deckPosition = new Position(WIDTH - 250, HEIGHT - 300);
+    var deck = new Deck(deckCards, deckPosition);
+    deck.image = 'resources/deck.png';
+
+    return deck;
+}
+
+function getRandomCard(stack) {
+    var cardIndex = Math.floor(Math.random() * stack.length);
+    var card = stack[cardIndex];
+    stack.splice(cardIndex, 1);
+    return card;
+}
+
+function shuffleDeck(cards) {
+    var i = cards.length, j, tempi, tempj;
+    if (i === 0) return false;
+    while (--i) {
+        j = Math.floor(Math.random() * (i + 1));
+        tempi = cards[i];
+        tempj = cards[j];
+        cards[i] = tempj;
+        cards[j] = tempi;
+    }
+
+    return cards;
+}
+
+function getCardFromDeck() {
+    return deck.cards.pop();
+}
+
+// Player stuff
 function Player(name) {
     this.name = name;
     this.hand = [];
@@ -215,33 +310,6 @@ function Player(name) {
     this.isProtected = false;
     this.enemyHands = {};
     this.position = givePlayerPositionByID(name);
-}
-
-function generateDeck() {
-    var deck = [];
-    for (var cardType in CARDS) {
-        var type = CARDS[cardType];
-        for (var i = 0; i < type.quantity; i++) {
-            var card = new Card(type.value, type.name, type.description, OWNERS.DECK, new Position(0, 0));
-            deck.push(card);
-        }
-    }
-
-    return deck;
-}
-
-function shuffleDeck(deck) {
-    var i = deck.length, j, tempi, tempj;
-    if (i === 0) return false;
-    while (--i) {
-        j = Math.floor(Math.random() * (i + 1));
-        tempi = deck[i];
-        tempj = deck[j];
-        deck[i] = tempj;
-        deck[j] = tempi;
-    }
-
-    return deck;
 }
 
 function initializePlayers(count) {
@@ -267,6 +335,15 @@ function initializePlayers(count) {
     return players;
 }
 
+function playerDrawCard(player) {
+    if (player.hand.length < 2) {
+        var newCard = getCardFromDeck();
+        newCard.owner = player.name;
+        player.hand.push(newCard);
+        renderPlayers();
+    }
+}
+
 function givePlayerPositionByID(playerID) {
     if (playerID === 'Player_1') {
         return new Position(50, 20);
@@ -280,12 +357,7 @@ function givePlayerPositionByID(playerID) {
 }
 
 // GUI stuff
-
-function drawText(currentCard, context) {
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    context.font = '30pt Arial';
-    //context.fillStyle = getLinearGradient(context);
-    context.fillText(currentCard.toString(), 100, 500);
+function drawText() {
 }
 
 //function playSound(soundResource) {
@@ -307,10 +379,6 @@ function getDiscardPile(players) {
     });
 
     return pile;
-}
-
-function getCardFromDeck() {
-    return deck.pop();
 }
 
 function playGuard(attacker, target) {
