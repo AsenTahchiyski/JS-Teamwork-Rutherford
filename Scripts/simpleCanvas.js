@@ -78,28 +78,32 @@ var backupCard;
 var container;
 
 window.onload = function main() {
-    init();
-    tick();
-    // rounds
-    //var roundWinner;
-    //var roundCounter = 1;
-    //do {
-    //    console.log('<<< ROUND ' + roundCounter + ' >>>');
-    //    roundWinner = processRound(players);
-    //    roundCounter++;
-    //    if (roundWinner) {
-    //        break;
-    //    }
-    //} while (player1.points < 4 && player2.points < 4 &&
-    //player3.points < 4 && player4.points < 4);
-    //
-    //var winner = players.sort(function (a, b) {
-    //    return a.points > b.points;
-    //})[players.length - 1];
-    //console.log(winner.name + ' wins the game!');
+    //init();
+    //tick();
+   processAllRounds();
 };
 
+function processAllRounds() {
 
+    var roundWinner;
+    var roundCounter = 1;
+    do {
+        init();
+        tick();
+        console.log('<<< ROUND ' + roundCounter + ' >>>');
+        roundWinner = processRound(players);
+        roundCounter++;
+        if (roundWinner) {
+            break;
+        }
+    } while (player1.points < 4 && player2.points < 4 &&
+    player3.points < 4 && player4.points < 4);
+
+    var winner = players.sort(function (a, b) {
+        return a.points > b.points;
+    })[players.length - 1];
+    console.log(winner.name + ' wins the game!');
+}
 
 // Initialization of game
 function init() {
@@ -238,7 +242,6 @@ function handlePlayerPlayCard(card) {
     var playerIndex = card.owner.slice(-1) - 1;
     var player = players[playerIndex];
     var target = chooseTarget(player, players);
-    console.log(players[playerIndex]);
     var indexOfCard = 0;
     while (true) {
         if (players[playerIndex].hand[indexOfCard] === card) {
@@ -597,16 +600,6 @@ function chooseCardToPlay(player) {
 }
 
 function processRound(players) {
-    var deck = generateDeck();
-    var backupCard = getRandomCard(deck); // Don't you forget about me
-
-    // deal cards
-    player1.hand.push(getRandomCard(deck));
-    drawCard(player1.hand[0]);
-    player2.hand.push(getRandomCard(deck));
-    player3.hand.push(getRandomCard(deck));
-    player4.hand.push(getRandomCard(deck));
-
     // choose first player
     var firstPlayer = Math.floor(Math.random() * 3.999);
 
@@ -617,6 +610,7 @@ function processRound(players) {
         updateProtection(currentPlayer);
         var newCard = getRandomCard(deck);
         currentPlayer.hand.push(newCard);
+
         // check for something wrong with hand count
         if (currentPlayer.hand.length > 2) {
             console.log('too many cards exception har-har');
@@ -626,10 +620,20 @@ function processRound(players) {
 
         // choose target and card
         var targetPlayer = chooseTarget(currentPlayer, players);
+        var cardToPlay = null;
+        if(!currentPlayer.isHuman) {
+            cardToPlay = chooseCardToPlay(currentPlayer, targetPlayer);
+        } else {
+            // TODO - human chooses a card
+        }
 
-        var cardToPlay = chooseCardToPlay(currentPlayer, targetPlayer);
         currentPlayer.hand.splice(currentPlayer.hand.indexOf(cardToPlay), 1);
         currentPlayer.discardPile.push(cardToPlay);
+
+        // if first card is played set the second to first ([0])
+        var cardLeft = currentPlayer.hand.pop();
+        currentPlayer.hand[0] = cardLeft;
+
         updateEnemyHandInfo(cardToPlay, currentPlayer, players);
 
         // log user turn
