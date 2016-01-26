@@ -110,8 +110,8 @@ function processAllRounds() {
         if (roundWinner) {
             break;
         }
-    } while (player1.points < 4 && player2.points < 4 &&
-    player3.points < 4 && player4.points < 4);
+    } while (players[0].points < 4 && players[1].points < 4 &&
+    players[2].points < 4 && players[3].points < 4);
 
     var winner = players.sort(function (a, b) {
         return a.points > b.points;
@@ -198,8 +198,8 @@ Card.prototype.toString = function () {
     return '(' + this.value + ')' + this.name + ': ' + this.description;
 };
 
-function addElementToBoard(object) {
-    var picture = object.image;
+function addElementToBoard(obj) {
+    var picture = obj.image;
     var image = new Image();
     image.src = picture;
     image.onload = function (event) {
@@ -684,7 +684,7 @@ function processRound(players) {
         if (!currentPlayer.isHuman) {
             targetPlayer = chooseTarget(currentPlayer, players)
         } else {
-            targetPlayer = selectEnemy(currentPlayer);
+            targetPlayer = selectEnemy();
         }
         var cardToPlay = null;
         if (!currentPlayer.isHuman) {
@@ -820,6 +820,18 @@ function updateProtection(player) {
     }
 }
 
-function selectEnemy(player) {
+function selectEnemy() {
     return players[1];
+}
+
+function updateEnemyHandInfo(cardPlayed, player, players) {
+    players.forEach(function (p) {
+        if (p.enemyHands[player.name] !== undefined) {
+            var cardIndex = arrayObjectIndexOf(p.enemyHands[player.name], cardPlayed);
+            if (p !== player && cardIndex >= 0) {
+                p.enemyHands[player.name].splice(cardIndex, 1);
+            }
+        }
+    });
+    return true;
 }

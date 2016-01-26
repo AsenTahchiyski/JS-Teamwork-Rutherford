@@ -26,8 +26,18 @@
       <file leaf-file-name="simpleCanvas.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1">
-              <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+            <state vertical-scroll-proportion="-7.0">
+              <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="love-letter-condensed.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/love-letter-condensed.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="459" column="0" selection-start-line="459" selection-start-column="0" selection-end-line="469" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -36,18 +46,18 @@
       <file leaf-file-name="simpleCanvas.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07521368">
-              <caret line="97" column="4" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="11" />
+            <state vertical-scroll-proportion="2.2841728">
+              <caret line="210" column="24" selection-start-line="210" selection-start-column="9" selection-end-line="210" selection-end-column="24" />
               <folding>
                 <element signature="e#62#242#0" expanded="false" />
                 <element signature="e#269#598#0" expanded="false" />
                 <element signature="n#!!block;n#stop#0" expanded="false" />
                 <element signature="n#!!block;n#tick#0" expanded="false" />
-                <element signature="e#5367#5443#0" expanded="false" />
+                <element signature="e#5379#5455#0" expanded="false" />
                 <element signature="n#!!block;n#Deck#0" expanded="false" />
                 <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
                 <element signature="n#!!block;n#Player#0" expanded="false" />
-                <element signature="e#12693#12730#0" expanded="false" />
+                <element signature="e#12699#12736#0" expanded="false" />
                 <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
                 <element signature="n#!!block;n#playBaron#0" expanded="false" />
                 <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
@@ -76,6 +86,7 @@
       <list>
         <option value="$PROJECT_DIR$/scripts/createjs-2015.11.26.min.js" />
         <option value="$PROJECT_DIR$/scripts/love-letter-condensed.js" />
+        <option value="$PROJECT_DIR$/simpleCanvas.html" />
         <option value="$PROJECT_DIR$/scripts/simpleCanvas.js" />
       </list>
     </option>
@@ -132,6 +143,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Teamwork JS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Teamwork JS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Teamwork JS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -327,11 +352,11 @@
             <element signature="e#269#598#0" expanded="false" />
             <element signature="n#!!block;n#stop#0" expanded="false" />
             <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="e#5367#5443#0" expanded="false" />
+            <element signature="e#5379#5455#0" expanded="false" />
             <element signature="n#!!block;n#Deck#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12693#12730#0" expanded="false" />
+            <element signature="e#12699#12736#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
@@ -374,11 +399,11 @@
             <element signature="e#269#598#0" expanded="false" />
             <element signature="n#!!block;n#stop#0" expanded="false" />
             <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="e#5367#5443#0" expanded="false" />
+            <element signature="e#5379#5455#0" expanded="false" />
             <element signature="n#!!block;n#Deck#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12693#12730#0" expanded="false" />
+            <element signature="e#12699#12736#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
@@ -421,11 +446,11 @@
             <element signature="e#269#598#0" expanded="false" />
             <element signature="n#!!block;n#stop#0" expanded="false" />
             <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="e#5367#5443#0" expanded="false" />
+            <element signature="e#5379#5455#0" expanded="false" />
             <element signature="n#!!block;n#Deck#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12693#12730#0" expanded="false" />
+            <element signature="e#12699#12736#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
@@ -485,36 +510,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/love-letter-condensed.js">
+    <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71282053">
-          <caret line="472" column="4" selection-start-line="472" selection-start-column="4" selection-end-line="472" selection-end-column="4" />
+        <state vertical-scroll-proportion="-7.0">
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
+    <entry file="file://$PROJECT_DIR$/scripts/love-letter-condensed.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1">
-          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="459" column="0" selection-start-line="459" selection-start-column="0" selection-end-line="469" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07521368">
-          <caret line="97" column="4" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="11" />
+        <state vertical-scroll-proportion="2.2841728">
+          <caret line="210" column="24" selection-start-line="210" selection-start-column="9" selection-end-line="210" selection-end-column="24" />
           <folding>
             <element signature="e#62#242#0" expanded="false" />
             <element signature="e#269#598#0" expanded="false" />
             <element signature="n#!!block;n#stop#0" expanded="false" />
             <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="e#5367#5443#0" expanded="false" />
+            <element signature="e#5379#5455#0" expanded="false" />
             <element signature="n#!!block;n#Deck#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12693#12730#0" expanded="false" />
+            <element signature="e#12699#12736#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
