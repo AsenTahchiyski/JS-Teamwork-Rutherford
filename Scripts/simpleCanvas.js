@@ -15,6 +15,7 @@ var CARDS = {
         name: 'Guard',
         value: 1,
         quantity: 5,
+        requiresEnemy: true,
         //picture: 'resources/cardFaces/guard.png',
         picture: 'resources/cardFaces/1.jpg',
         description: 'Name a non-Guard card and choose another player. If that player has that card, he or she is out of the round.'
@@ -23,6 +24,7 @@ var CARDS = {
         name: 'Priest',
         value: 2,
         quantity: 2,
+        requiresEnemy: true,
         //picture: 'resources/cardFaces/priest.png',
         picture: 'resources/cardFaces/2.jpg',
         description: 'Look at another player\'s hand.'
@@ -31,6 +33,7 @@ var CARDS = {
         name: 'Baron',
         value: 3,
         quantity: 2,
+        requiresEnemy: true,
         //picture: 'resources/cardFaces/baron.png',
         picture: 'resources/cardFaces/3.jpg',
         description: 'You and another player secretly compare hands. The player with the lower value is out of the round.'
@@ -39,6 +42,7 @@ var CARDS = {
         name: 'Handmaid',
         value: 4,
         quantity: 2,
+        requiresEnemy: false,
         //picture: 'resources/cardFaces/handmaid.png',
         picture: 'resources/cardFaces/4.jpg',
         description: 'Until your next turn, ignore all effects from other players\' actions.'
@@ -47,6 +51,7 @@ var CARDS = {
         name: 'Prince',
         value: 5,
         quantity: 2,
+        requiresEnemy: true,
         //picture: 'resources/cardFaces/prince.png',
         picture: 'resources/cardFaces/5.jpg',
         description: 'Choose any player (including yourself) to discard his or her hand and draw a new card.'
@@ -55,6 +60,7 @@ var CARDS = {
         name: 'King',
         value: 6,
         quantity: 1,
+        requiresEnemy: true,
         //picture: 'resources/cardFaces/king.png',
         picture: 'resources/cardFaces/6.jpg',
         description: 'Trade hands with another player of your choice.'
@@ -63,6 +69,7 @@ var CARDS = {
         name: 'Countess',
         value: 7,
         quantity: 1,
+        requiresEnemy: false,
         //picture: 'resources/cardFaces/countess.png',
         picture: 'resources/cardFaces/7.jpg',
         description: 'If you have this card and the King or Prince in your hand, you must discard this card.'
@@ -71,6 +78,7 @@ var CARDS = {
         name: 'Princess',
         value: 8,
         quantity: 1,
+        requiresEnemy: false,
         //picture: 'resources/cardFaces/princess.png',
         picture: 'resources/cardFaces/8.jpg',
         description: 'If you discard this card, you are out of the round.'
@@ -78,16 +86,16 @@ var CARDS = {
 };
 
 var canvas, stage;
-var mouseTarget;
 var offset;
 var update;
 var deck, players;
 var backupCard;
 var container;
+var myPlayer;
 
 window.onload = function main() {
-    //init();
-    //tick();
+    init();
+    tick();
     processAllRounds();
 };
 
@@ -96,8 +104,6 @@ function processAllRounds() {
     var roundWinner;
     var roundCounter = 1;
     do {
-        init();
-        tick();
         console.log('<<< ROUND ' + roundCounter + ' >>>');
         roundWinner = processRound(players);
         roundCounter++;
@@ -175,13 +181,15 @@ function tick(event) {
 // Main elements
 
 //Card stuff
-function Card(value, name, description, owner, position) {
+function Card(value, name, description, owner, position, requiresEnemy) {
     this.value = value;
     this.name = name;
     this.description = description;
     this.owner = owner;
     this.position = position;
     this.image = null;
+    this.isActive = false;
+    this.requiresEnemy = requiresEnemy;
     //this.previousArrayIndex = null;
     //this.isHovered = false;
 }
@@ -196,50 +204,77 @@ function addElementToBoard(object) {
     image.src = picture;
     image.onload = function (event) {
         var image = event.target;
-        handleImageLoad(image, object);
+        handleImageLoad(image, obj);
     };
 }
 
-function handleImageLoad(image, object) { //card
+function handleImageLoad(image, obj) { //card
     var bitmap;
     stage.addChild(container);
     bitmap = new createjs.Bitmap(image);
     container.addChild(bitmap);
-    bitmap.x = object.position.x;
-    bitmap.y = object.position.y;
+    bitmap.x = obj.position.x;
+    bitmap.y = obj.position.y;
     bitmap.scale = 1;
     bitmap.name = 'object' + Math.floor(Math.random() * 100);
     bitmap.cursor = 'pointer';
     stage.update();
     var player = null;
 
-    if (object instanceof Card) {
-        var playerIndex = object.owner.slice(-1) - 1;
-        player = players[playerIndex];
+    if (obj instanceof Card) {
+        player = getCardOwner(obj);
     }
 
-    if (object instanceof Deck || player.isHuman) {
-        bitmap.object = object;
-        bitmap.on('mousedown', function (evt) {
-            this.parent.addChild(this);
-            this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
-            if (object instanceof Deck) {
-                playerDrawCard(players[0]);
-                if (object.cards.length === 0) {
-                    container.removeChild(this);
-                }
-            } else {
-                handlePlayerPlayCard(this.object);
+    bitmap.object = obj;
+    obj.bitmap = bitmap;
+    bitmap.on('mousedown', function (evt) {
+        this.parent.addChild(this);
+        this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
+        if (obj instanceof Deck) {
+            playerDrawCard(players[0]);
+            if (obj.cards.length === 0) {
                 container.removeChild(this);
             }
-            update = true;
-        });
-        bitmap.on('rollover', function (evt) {
-            this.parent.addChild(this);
-            this.scaleX = this.scaleY = this.scale * 1.1;
-            update = true;
-        });
-    }
+        } else {
+            if (obj instanceof Card && obj.owner === myPlayer.name) {
+                this.object.isActive = true;
+                var activeCards = myPlayer.hand.filter(function(c) {
+                    return c.isActive;
+                });
+                if(activeCards.length > 0) {
+                    if(activeCards[0].name !== 'Prince') {
+                        activeCards[0].isActive = false;
+                        this.object.isActive = true;
+                    } else {
+                        handlePlayerPlayCard(activeCards[0], myPlayer);
+                        container.removeChild(activeCards[0].bitmap);
+                    }
+                }
+                if(!this.object.requiresEnemy) {
+                    handlePlayerPlayCard(this.object);
+                    container.removeChild(activeCards[0].bitmap);
+                }
+            } else if(obj instanceof Card) {
+                // TODO check if another card in hand is active
+                var activeCards = myPlayer.hand.filter(function(c) {
+                    return c.isActive;
+                });
+                if(activeCards.length > 0) {
+                    if(activeCards[0].requiresEnemy && player !== myPlayer) {
+                        handlePlayerPlayCard(activeCards[0], player);
+                        container.removeChild(activeCards[0].bitmap);
+                    }
+                }
+            }
+        }
+        update = true;
+    });
+    bitmap.on('rollover', function (evt) {
+        this.parent.addChild(this);
+        this.scaleX = this.scaleY = this.scale * 1.1;
+        update = true;
+    });
+
 
     //card.image = bitmap;
 
@@ -252,11 +287,18 @@ function handleImageLoad(image, object) { //card
     createjs.Ticker.addEventListener('tick', tick);
 }
 
-function handlePlayerPlayCard(card) {
+function getCardOwner(obj) {
+    var playerIndex = obj.owner.slice(-1) - 1;
+    return players[playerIndex];
+}
+
+function handlePlayerPlayCard(card, target) {
     // Remove card from player hand and add it to discard pile
     var playerIndex = card.owner.slice(-1) - 1;
     var player = players[playerIndex];
-    var target = chooseTarget(player, players);
+    if(!player.isHuman) {
+        target = chooseTarget(player, players);
+    }
     var indexOfCard = 0;
     while (true) {
         if (players[playerIndex].hand[indexOfCard] === card) {
@@ -271,15 +313,15 @@ function handlePlayerPlayCard(card) {
 
     // Activate card effect
     if (card.name === 'Guard') {
-        playGuard(player, players);
+        playGuard(player, target);
     } else if (card.name === 'Priest') {
-        playPriest(player, players);
+        playPriest(player, target);
     } else if (card.name === 'Baron') {
         playBaron(player, target);
     } else if (card.name === 'Handmaid') {
         playHandmaid(player);
     } else if (card.name === 'Prince') {
-        playPrince(target, deck.cards);
+        playPrince(target);
     } else if (card.name === 'King') {
         playKing(player, target);
     } else if (card.name === 'Countess') {
@@ -300,7 +342,7 @@ function generateDeck() {
     for (var cardType in CARDS) {
         var type = CARDS[cardType];
         for (var i = 0; i < type.quantity; i++) {
-            var card = new Card(type.value, type.name, type.description, OWNERS.DECK, new Position(0, 0));
+            var card = new Card(type.value, type.name, type.description, OWNERS.DECK, new Position(0, 0), type.requiresEnemy);
             card.image = type.picture;
             deckCards.push(card);
         }
@@ -356,7 +398,7 @@ function initializePlayers(count) {
     var isHuman = false;
     for (var i = 1; i <= count; i++) {
         isHuman = i === 1 ? true : false;
-        var player = new Player('Player_' + i, isHuman);
+        var player = new Player('Player' + i, isHuman);
         var card = getCardFromDeck();
         card.owner = player.name;
         card.position = new Position(player.position.x, player.position.y);
@@ -373,6 +415,7 @@ function initializePlayers(count) {
         players.push(player);
     }
 
+    myPlayer = players[0]; // should be edited for multi
     return players;
 }
 
@@ -386,11 +429,11 @@ function playerDrawCard(player) {
 }
 
 function givePlayerPositionByID(playerID) {
-    if (playerID === 'Player_1') {
+    if (playerID === 'Player1') {
         return new Position(50, 20);
-    } else if (playerID === 'Player_2') {
+    } else if (playerID === 'Player2') {
         return new Position(330, 20);
-    } else if (playerID === 'Player_3') {
+    } else if (playerID === 'Player3') {
         return new Position(610, 20);
     } else {
         return new Position(890, 20);
@@ -501,14 +544,14 @@ function playHandmaid(player) {
     return true;
 }
 
-function playPrince(target, deck) {
+function playPrince(target) {
     var discarded = target.hand.pop();
     target.discardPile.push(discarded);
     if (discarded.value === 8) {
         target.isAlive = false;
         console.log(target.name + ' dropped the princess, bye-bye');
     } else {
-        target.hand.push(getRandomCard(deck));
+        target.hand.push(getCardFromDeck());
         console.log(target.name + ' discards his/her card and draws another');
     }
 
@@ -517,7 +560,10 @@ function playPrince(target, deck) {
 
 function playKing(attacker, target) {
     var cardToGive = attacker.hand.pop();
-    attacker.hand.push(target.hand.pop());
+    cardToGive.owner = target.name;
+    var cardToTake = target.hand.pop();
+    cardToTake.owner = attacker.name;
+    attacker.hand.push(cardToTake);
     target.hand.push(cardToGive);
     console.log(attacker.name + ' swaps hand with ' + target.name);
     return true;

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ec0e429-8092-48c0-b395-7c6f1cdd47a4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/simpleCanvas.js" afterPath="$PROJECT_DIR$/scripts/simpleCanvas.js" />
     </list>
     <ignored path="Teamwork-Rutherford.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,8 +26,8 @@
       <file leaf-file-name="simpleCanvas.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.5">
-              <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+            <state vertical-scroll-proportion="-2.1">
+              <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -36,34 +36,21 @@
       <file leaf-file-name="simpleCanvas.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3897436">
-              <caret line="220" column="51" selection-start-line="220" selection-start-column="51" selection-end-line="220" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.07521368">
+              <caret line="97" column="4" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="11" />
               <folding>
                 <element signature="e#62#242#0" expanded="false" />
-                <element signature="n#!!block;n#processAllRounds#0" expanded="false" />
-                <element signature="n#!!block;n#init#0" expanded="false" />
+                <element signature="e#269#598#0" expanded="false" />
                 <element signature="n#!!block;n#stop#0" expanded="false" />
-                <element signature="n#!!block;n#renderPlayers#0" expanded="false" />
                 <element signature="n#!!block;n#tick#0" expanded="false" />
-                <element signature="n#!!block;n#Card#0" expanded="false" />
-                <element signature="e#5089#5165#0" expanded="false" />
-                <element signature="n#!!block;n#addElementToBoard#0" expanded="false" />
+                <element signature="e#5367#5443#0" expanded="false" />
                 <element signature="n#!!block;n#Deck#0" expanded="false" />
-                <element signature="n#!!block;n#generateDeck#0" expanded="false" />
                 <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
-                <element signature="n#!!block;n#getCardFromDeck#0" expanded="false" />
                 <element signature="n#!!block;n#Player#0" expanded="false" />
-                <element signature="n#!!block;n#initializePlayers#0" expanded="false" />
-                <element signature="n#!!block;n#playerDrawCard#0" expanded="false" />
-                <element signature="n#!!block;n#givePlayerPositionByID#0" expanded="false" />
-                <element signature="e#11075#11112#0" expanded="false" />
+                <element signature="e#12693#12730#0" expanded="false" />
                 <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-                <element signature="n#!!block;n#playGuard#0" expanded="false" />
-                <element signature="n#!!block;n#playPriest#0" expanded="false" />
                 <element signature="n#!!block;n#playBaron#0" expanded="false" />
                 <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
-                <element signature="n#!!block;n#playPrince#0" expanded="false" />
-                <element signature="n#!!block;n#playKing#0" expanded="false" />
                 <element signature="n#!!block;n#playCountess#0" expanded="false" />
                 <element signature="n#!!block;n#playPrincess#0" expanded="false" />
                 <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
@@ -298,7 +285,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="27" />
+      <option name="time" value="29" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -337,30 +324,17 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#62#242#0" expanded="false" />
-            <element signature="n#!!block;n#processAllRounds#0" expanded="false" />
-            <element signature="n#!!block;n#init#0" expanded="false" />
+            <element signature="e#269#598#0" expanded="false" />
             <element signature="n#!!block;n#stop#0" expanded="false" />
-            <element signature="n#!!block;n#renderPlayers#0" expanded="false" />
             <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="n#!!block;n#Card#0" expanded="false" />
-            <element signature="e#5089#5165#0" expanded="false" />
-            <element signature="n#!!block;n#addElementToBoard#0" expanded="false" />
+            <element signature="e#5367#5443#0" expanded="false" />
             <element signature="n#!!block;n#Deck#0" expanded="false" />
-            <element signature="n#!!block;n#generateDeck#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
-            <element signature="n#!!block;n#getCardFromDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#initializePlayers#0" expanded="false" />
-            <element signature="n#!!block;n#playerDrawCard#0" expanded="false" />
-            <element signature="n#!!block;n#givePlayerPositionByID#0" expanded="false" />
-            <element signature="e#11075#11112#0" expanded="false" />
+            <element signature="e#12693#12730#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-            <element signature="n#!!block;n#playGuard#0" expanded="false" />
-            <element signature="n#!!block;n#playPriest#0" expanded="false" />
             <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
-            <element signature="n#!!block;n#playPrince#0" expanded="false" />
-            <element signature="n#!!block;n#playKing#0" expanded="false" />
             <element signature="n#!!block;n#playCountess#0" expanded="false" />
             <element signature="n#!!block;n#playPrincess#0" expanded="false" />
             <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
@@ -397,30 +371,17 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#62#242#0" expanded="false" />
-            <element signature="n#!!block;n#processAllRounds#0" expanded="false" />
-            <element signature="n#!!block;n#init#0" expanded="false" />
+            <element signature="e#269#598#0" expanded="false" />
             <element signature="n#!!block;n#stop#0" expanded="false" />
-            <element signature="n#!!block;n#renderPlayers#0" expanded="false" />
             <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="n#!!block;n#Card#0" expanded="false" />
-            <element signature="e#5089#5165#0" expanded="false" />
-            <element signature="n#!!block;n#addElementToBoard#0" expanded="false" />
+            <element signature="e#5367#5443#0" expanded="false" />
             <element signature="n#!!block;n#Deck#0" expanded="false" />
-            <element signature="n#!!block;n#generateDeck#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
-            <element signature="n#!!block;n#getCardFromDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#initializePlayers#0" expanded="false" />
-            <element signature="n#!!block;n#playerDrawCard#0" expanded="false" />
-            <element signature="n#!!block;n#givePlayerPositionByID#0" expanded="false" />
-            <element signature="e#11075#11112#0" expanded="false" />
+            <element signature="e#12693#12730#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-            <element signature="n#!!block;n#playGuard#0" expanded="false" />
-            <element signature="n#!!block;n#playPriest#0" expanded="false" />
             <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
-            <element signature="n#!!block;n#playPrince#0" expanded="false" />
-            <element signature="n#!!block;n#playKing#0" expanded="false" />
             <element signature="n#!!block;n#playCountess#0" expanded="false" />
             <element signature="n#!!block;n#playPrincess#0" expanded="false" />
             <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
@@ -457,30 +418,17 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#62#242#0" expanded="false" />
-            <element signature="n#!!block;n#processAllRounds#0" expanded="false" />
-            <element signature="n#!!block;n#init#0" expanded="false" />
+            <element signature="e#269#598#0" expanded="false" />
             <element signature="n#!!block;n#stop#0" expanded="false" />
-            <element signature="n#!!block;n#renderPlayers#0" expanded="false" />
             <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="n#!!block;n#Card#0" expanded="false" />
-            <element signature="e#5089#5165#0" expanded="false" />
-            <element signature="n#!!block;n#addElementToBoard#0" expanded="false" />
+            <element signature="e#5367#5443#0" expanded="false" />
             <element signature="n#!!block;n#Deck#0" expanded="false" />
-            <element signature="n#!!block;n#generateDeck#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
-            <element signature="n#!!block;n#getCardFromDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#initializePlayers#0" expanded="false" />
-            <element signature="n#!!block;n#playerDrawCard#0" expanded="false" />
-            <element signature="n#!!block;n#givePlayerPositionByID#0" expanded="false" />
-            <element signature="e#11075#11112#0" expanded="false" />
+            <element signature="e#12693#12730#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-            <element signature="n#!!block;n#playGuard#0" expanded="false" />
-            <element signature="n#!!block;n#playPriest#0" expanded="false" />
             <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
-            <element signature="n#!!block;n#playPrince#0" expanded="false" />
-            <element signature="n#!!block;n#playKing#0" expanded="false" />
             <element signature="n#!!block;n#playCountess#0" expanded="false" />
             <element signature="n#!!block;n#playPrincess#0" expanded="false" />
             <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
@@ -537,14 +485,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.5">
-          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/love-letter-condensed.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.71282053">
@@ -553,36 +493,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.1">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3897436">
-          <caret line="220" column="51" selection-start-line="220" selection-start-column="51" selection-end-line="220" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.07521368">
+          <caret line="97" column="4" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="11" />
           <folding>
             <element signature="e#62#242#0" expanded="false" />
-            <element signature="n#!!block;n#processAllRounds#0" expanded="false" />
-            <element signature="n#!!block;n#init#0" expanded="false" />
+            <element signature="e#269#598#0" expanded="false" />
             <element signature="n#!!block;n#stop#0" expanded="false" />
-            <element signature="n#!!block;n#renderPlayers#0" expanded="false" />
             <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="n#!!block;n#Card#0" expanded="false" />
-            <element signature="e#5089#5165#0" expanded="false" />
-            <element signature="n#!!block;n#addElementToBoard#0" expanded="false" />
+            <element signature="e#5367#5443#0" expanded="false" />
             <element signature="n#!!block;n#Deck#0" expanded="false" />
-            <element signature="n#!!block;n#generateDeck#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
-            <element signature="n#!!block;n#getCardFromDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#initializePlayers#0" expanded="false" />
-            <element signature="n#!!block;n#playerDrawCard#0" expanded="false" />
-            <element signature="n#!!block;n#givePlayerPositionByID#0" expanded="false" />
-            <element signature="e#11075#11112#0" expanded="false" />
+            <element signature="e#12693#12730#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-            <element signature="n#!!block;n#playGuard#0" expanded="false" />
-            <element signature="n#!!block;n#playPriest#0" expanded="false" />
             <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
-            <element signature="n#!!block;n#playPrince#0" expanded="false" />
-            <element signature="n#!!block;n#playKing#0" expanded="false" />
             <element signature="n#!!block;n#playCountess#0" expanded="false" />
             <element signature="n#!!block;n#playPrincess#0" expanded="false" />
             <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
