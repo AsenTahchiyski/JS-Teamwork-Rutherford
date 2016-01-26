@@ -15,56 +15,64 @@ var CARDS = {
         name: 'Guard',
         value: 1,
         quantity: 5,
-        picture: 'resources/cardFaces/guard.png',
+        //picture: 'resources/cardFaces/guard.png',
+        picture: 'resources/cardFaces/1.jpg',
         description: 'Name a non-Guard card and choose another player. If that player has that card, he or she is out of the round.'
     },
     PRIEST: {
         name: 'Priest',
         value: 2,
         quantity: 2,
-        picture: 'resources/cardFaces/priest.png',
+        //picture: 'resources/cardFaces/priest.png',
+        picture: 'resources/cardFaces/2.jpg',
         description: 'Look at another player\'s hand.'
     },
     BARON: {
         name: 'Baron',
         value: 3,
         quantity: 2,
-        picture: 'resources/cardFaces/baron.png',
+        //picture: 'resources/cardFaces/baron.png',
+        picture: 'resources/cardFaces/3.jpg',
         description: 'You and another player secretly compare hands. The player with the lower value is out of the round.'
     },
     HANDMAID: {
         name: 'Handmaid',
         value: 4,
         quantity: 2,
-        picture: 'resources/cardFaces/handmaid.png',
+        //picture: 'resources/cardFaces/handmaid.png',
+        picture: 'resources/cardFaces/4.jpg',
         description: 'Until your next turn, ignore all effects from other players\' actions.'
     },
     PRINCE: {
         name: 'Prince',
         value: 5,
         quantity: 2,
-        picture: 'resources/cardFaces/prince.png',
+        //picture: 'resources/cardFaces/prince.png',
+        picture: 'resources/cardFaces/5.jpg',
         description: 'Choose any player (including yourself) to discard his or her hand and draw a new card.'
     },
     KING: {
         name: 'King',
         value: 6,
         quantity: 1,
-        picture: 'resources/cardFaces/king.png',
+        //picture: 'resources/cardFaces/king.png',
+        picture: 'resources/cardFaces/6.jpg',
         description: 'Trade hands with another player of your choice.'
     },
     COUNTESS: {
         name: 'Countess',
         value: 7,
         quantity: 1,
-        picture: 'resources/cardFaces/countess.png',
+        //picture: 'resources/cardFaces/countess.png',
+        picture: 'resources/cardFaces/7.jpg',
         description: 'If you have this card and the King or Prince in your hand, you must discard this card.'
     },
     PRINCESS: {
         name: 'Princess',
         value: 8,
         quantity: 1,
-        picture: 'resources/cardFaces/princess.png',
+        //picture: 'resources/cardFaces/princess.png',
+        picture: 'resources/cardFaces/8.jpg',
         description: 'If you discard this card, you are out of the round.'
     }
 };
@@ -80,7 +88,7 @@ var container;
 window.onload = function main() {
     //init();
     //tick();
-   processAllRounds();
+    processAllRounds();
 };
 
 function processAllRounds() {
@@ -203,28 +211,35 @@ function handleImageLoad(image, object) { //card
     bitmap.name = 'object' + Math.floor(Math.random() * 100);
     bitmap.cursor = 'pointer';
     stage.update();
-    bitmap.object = object;
-    bitmap.on('mousedown', function (evt) {
-        this.parent.addChild(this);
-        this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
-        if (object instanceof Deck) {
-            playerDrawCard(players[0]);
-            if (object.cards.length === 0) {
+    var player = null;
+
+    if (object instanceof Card) {
+        var playerIndex = object.owner.slice(-1) - 1;
+        player = players[playerIndex];
+    }
+
+    if (object instanceof Deck || player.isHuman) {
+        bitmap.object = object;
+        bitmap.on('mousedown', function (evt) {
+            this.parent.addChild(this);
+            this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
+            if (object instanceof Deck) {
+                playerDrawCard(players[0]);
+                if (object.cards.length === 0) {
+                    container.removeChild(this);
+                }
+            } else {
+                handlePlayerPlayCard(this.object);
                 container.removeChild(this);
             }
-        } else {
-            handlePlayerPlayCard(this.object);
-            container.removeChild(this);
-        }
-        update = true;
-    });
-    bitmap.on('rollover', function (evt) {
-
-        this.parent.addChild(this);
-        this.scaleX = this.scaleY = this.scale * 1.1;
-        update = true;
-
-    });
+            update = true;
+        });
+        bitmap.on('rollover', function (evt) {
+            this.parent.addChild(this);
+            this.scaleX = this.scaleY = this.scale * 1.1;
+            update = true;
+        });
+    }
 
     //card.image = bitmap;
 
@@ -298,10 +313,10 @@ function generateDeck() {
     return deck;
 }
 
-function getRandomCard(stack) {
-    var cardIndex = Math.floor(Math.random() * stack.length);
-    var card = stack[cardIndex];
-    stack.splice(cardIndex, 1);
+function getRandomCard() {
+    var cardIndex = Math.floor(Math.random() * deck.cards.length);
+    var card = deck.cards[cardIndex];
+    deck.cards.splice(cardIndex, 1);
     return card;
 }
 
@@ -619,12 +634,15 @@ function processRound(players) {
         }
 
         // choose target and card
-        var targetPlayer = chooseTarget(currentPlayer, players);
-        var cardToPlay = null;
-        if(!currentPlayer.isHuman) {
-            cardToPlay = chooseCardToPlay(currentPlayer, targetPlayer);
+        var targetPlayer = null;
+        if (!currentPlayer.isHuman) {
+            targetPlayer = chooseTarget(currentPlayer, players)
         } else {
-            // TODO - human chooses a card
+            targetPlayer = selectEnemy(currentPlayer);
+        }
+        var cardToPlay = null;
+        if (!currentPlayer.isHuman) {
+            cardToPlay = chooseCardToPlay(currentPlayer, targetPlayer);
         }
 
         currentPlayer.hand.splice(currentPlayer.hand.indexOf(cardToPlay), 1);
@@ -754,4 +772,8 @@ function updateProtection(player) {
     if (player.isProtected) {
         player.isProtected = false;
     }
+}
+
+function selectEnemy(player) {
+    return players[1];
 }

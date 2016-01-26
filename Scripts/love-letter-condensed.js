@@ -469,6 +469,10 @@ function updateEnemyHandInfo(cardPlayed, player, players) {
     return true;
 }
 
+function chooseEnemy(player) {
+
+}
+
 // >>> GAME START <<< //
 
 var player1 = new Player('Player 1');
