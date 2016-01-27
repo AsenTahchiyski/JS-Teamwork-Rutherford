@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ec0e429-8092-48c0-b395-7c6f1cdd47a4" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/deck.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/simpleCanvas.js" afterPath="$PROJECT_DIR$/scripts/simpleCanvas.js" />
     </list>
     <ignored path="Teamwork-Rutherford.iws" />
@@ -26,8 +28,8 @@
       <file leaf-file-name="simpleCanvas.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.0">
-              <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+            <state vertical-scroll-proportion="-2.6153846">
+              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -37,8 +39,10 @@
         <entry file="file://$PROJECT_DIR$/scripts/love-letter-condensed.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="459" column="0" selection-start-line="459" selection-start-column="0" selection-end-line="469" selection-end-column="1" />
-              <folding />
+              <caret line="501" column="0" selection-start-line="501" selection-start-column="0" selection-end-line="501" selection-end-column="0" />
+              <folding>
+                <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -46,21 +50,17 @@
       <file leaf-file-name="simpleCanvas.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.2841728">
-              <caret line="210" column="24" selection-start-line="210" selection-start-column="9" selection-end-line="210" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.7898383">
+              <caret line="289" column="20" selection-start-line="289" selection-start-column="4" selection-end-line="289" selection-end-column="20" />
               <folding>
-                <element signature="e#62#242#0" expanded="false" />
                 <element signature="e#269#598#0" expanded="false" />
-                <element signature="n#!!block;n#stop#0" expanded="false" />
-                <element signature="n#!!block;n#tick#0" expanded="false" />
-                <element signature="e#5379#5455#0" expanded="false" />
-                <element signature="n#!!block;n#Deck#0" expanded="false" />
+                <element signature="e#5381#5457#0" expanded="false" />
                 <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
                 <element signature="n#!!block;n#Player#0" expanded="false" />
-                <element signature="e#12699#12736#0" expanded="false" />
+                <element signature="e#12996#13033#0" expanded="false" />
                 <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-                <element signature="n#!!block;n#playBaron#0" expanded="false" />
                 <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
+                <element signature="n#!!block;n#playKing#0" expanded="false" />
                 <element signature="n#!!block;n#playCountess#0" expanded="false" />
                 <element signature="n#!!block;n#playPrincess#0" expanded="false" />
                 <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
@@ -71,6 +71,7 @@
                 <element signature="n#!!block;n#endRound#0" expanded="false" />
                 <element signature="n#!!block;n#showScore#0" expanded="false" />
                 <element signature="n#!!block;n#updateProtection#0" expanded="false" />
+                <element signature="n#!!block;n#updateEnemyHandInfo#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -99,8 +100,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -127,32 +128,31 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Teamwork JS" />
+              <option name="myItemId" value="JS-Teamwork-Rutherford" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Teamwork JS" />
+              <option name="myItemId" value="JS-Teamwork-Rutherford" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Teamwork JS" />
+              <option name="myItemId" value="JS-Teamwork-Rutherford" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Teamwork JS" />
+              <option name="myItemId" value="JS-Teamwork-Rutherford" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Teamwork JS" />
+              <option name="myItemId" value="JS-Teamwork-Rutherford" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -163,6 +163,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -170,8 +171,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="JavaScript Debug.simpleCanvas.html">
+  <component name="RunManager" selected="JavaScript Debug.simpleCanvas.html (1)">
     <configuration default="false" name="love-letter-condensed.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="love-letter-condensed.js" working-dir="$PROJECT_DIR$/scripts">
       <method />
     </configuration>
@@ -179,6 +182,9 @@
       <method />
     </configuration>
     <configuration default="false" name="simpleCanvas.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Teamwork JS/simpleCanvas.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="simpleCanvas.html (1)" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/JS-Teamwork-Rutherford/simpleCanvas.html">
       <method />
     </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -229,16 +235,18 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Node.js.love-letter-condensed.js" />
       <item index="1" class="java.lang.String" itemvalue="Node.js.simpleCanvas.js" />
       <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.simpleCanvas.html" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.simpleCanvas.html (1)" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.simpleCanvas.html" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.simpleCanvas.js" />
-        <item index="2" class="java.lang.String" itemvalue="Node.js.love-letter-condensed.js" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.simpleCanvas.html (1)" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.simpleCanvas.html" />
+        <item index="2" class="java.lang.String" itemvalue="Node.js.simpleCanvas.js" />
+        <item index="3" class="java.lang.String" itemvalue="Node.js.love-letter-condensed.js" />
       </list>
     </recent_temporary>
   </component>
@@ -256,13 +264,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.116071425" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.115384616" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32626426" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3261105" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30668843" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -310,7 +318,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="29" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -330,6 +338,98 @@
     <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/love-letter-condensed.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="501" column="0" selection-start-line="501" selection-start-column="0" selection-end-line="501" selection-end-column="0" />
+          <folding>
+            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#269#598#0" expanded="false" />
+            <element signature="e#5381#5457#0" expanded="false" />
+            <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
+            <element signature="n#!!block;n#Player#0" expanded="false" />
+            <element signature="e#12996#13033#0" expanded="false" />
+            <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
+            <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
+            <element signature="n#!!block;n#playKing#0" expanded="false" />
+            <element signature="n#!!block;n#playCountess#0" expanded="false" />
+            <element signature="n#!!block;n#playPrincess#0" expanded="false" />
+            <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
+            <element signature="n#!!block;n#arrayObjectIndexOf#0" expanded="false" />
+            <element signature="n#!!block;n#getPossibleEnemyCards#0" expanded="false" />
+            <element signature="n#!!block;n#chooseCardToPlay#0" expanded="false" />
+            <element signature="n#!!block;n#getAlivePlayers#0" expanded="false" />
+            <element signature="n#!!block;n#endRound#0" expanded="false" />
+            <element signature="n#!!block;n#showScore#0" expanded="false" />
+            <element signature="n#!!block;n#updateProtection#0" expanded="false" />
+            <element signature="n#!!block;n#updateEnemyHandInfo#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/love-letter-condensed.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="452" column="0" selection-start-line="452" selection-start-column="0" selection-end-line="452" selection-end-column="0" />
+          <folding>
+            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#269#598#0" expanded="false" />
+            <element signature="e#5381#5457#0" expanded="false" />
+            <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
+            <element signature="n#!!block;n#Player#0" expanded="false" />
+            <element signature="e#12996#13033#0" expanded="false" />
+            <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
+            <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
+            <element signature="n#!!block;n#playKing#0" expanded="false" />
+            <element signature="n#!!block;n#playCountess#0" expanded="false" />
+            <element signature="n#!!block;n#playPrincess#0" expanded="false" />
+            <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
+            <element signature="n#!!block;n#arrayObjectIndexOf#0" expanded="false" />
+            <element signature="n#!!block;n#getPossibleEnemyCards#0" expanded="false" />
+            <element signature="n#!!block;n#chooseCardToPlay#0" expanded="false" />
+            <element signature="n#!!block;n#getAlivePlayers#0" expanded="false" />
+            <element signature="n#!!block;n#endRound#0" expanded="false" />
+            <element signature="n#!!block;n#showScore#0" expanded="false" />
+            <element signature="n#!!block;n#updateProtection#0" expanded="false" />
+            <element signature="n#!!block;n#updateEnemyHandInfo#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -348,18 +448,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#62#242#0" expanded="false" />
             <element signature="e#269#598#0" expanded="false" />
-            <element signature="n#!!block;n#stop#0" expanded="false" />
-            <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="e#5379#5455#0" expanded="false" />
-            <element signature="n#!!block;n#Deck#0" expanded="false" />
+            <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12699#12736#0" expanded="false" />
+            <element signature="e#12996#13033#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-            <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
+            <element signature="n#!!block;n#playKing#0" expanded="false" />
             <element signature="n#!!block;n#playCountess#0" expanded="false" />
             <element signature="n#!!block;n#playPrincess#0" expanded="false" />
             <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
@@ -370,6 +466,7 @@
             <element signature="n#!!block;n#endRound#0" expanded="false" />
             <element signature="n#!!block;n#showScore#0" expanded="false" />
             <element signature="n#!!block;n#updateProtection#0" expanded="false" />
+            <element signature="n#!!block;n#updateEnemyHandInfo#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -378,7 +475,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="494" column="45" selection-start-line="479" selection-start-column="0" selection-end-line="494" selection-end-column="45" />
-          <folding />
+          <folding>
+            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -395,18 +494,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#62#242#0" expanded="false" />
             <element signature="e#269#598#0" expanded="false" />
-            <element signature="n#!!block;n#stop#0" expanded="false" />
-            <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="e#5379#5455#0" expanded="false" />
-            <element signature="n#!!block;n#Deck#0" expanded="false" />
+            <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12699#12736#0" expanded="false" />
+            <element signature="e#12996#13033#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-            <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
+            <element signature="n#!!block;n#playKing#0" expanded="false" />
             <element signature="n#!!block;n#playCountess#0" expanded="false" />
             <element signature="n#!!block;n#playPrincess#0" expanded="false" />
             <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
@@ -417,6 +512,7 @@
             <element signature="n#!!block;n#endRound#0" expanded="false" />
             <element signature="n#!!block;n#showScore#0" expanded="false" />
             <element signature="n#!!block;n#updateProtection#0" expanded="false" />
+            <element signature="n#!!block;n#updateEnemyHandInfo#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -425,7 +521,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="1" selection-start-line="23" selection-start-column="0" selection-end-line="41" selection-end-column="1" />
-          <folding />
+          <folding>
+            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -442,18 +540,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#62#242#0" expanded="false" />
             <element signature="e#269#598#0" expanded="false" />
-            <element signature="n#!!block;n#stop#0" expanded="false" />
-            <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="e#5379#5455#0" expanded="false" />
-            <element signature="n#!!block;n#Deck#0" expanded="false" />
+            <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12699#12736#0" expanded="false" />
+            <element signature="e#12996#13033#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-            <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
+            <element signature="n#!!block;n#playKing#0" expanded="false" />
             <element signature="n#!!block;n#playCountess#0" expanded="false" />
             <element signature="n#!!block;n#playPrincess#0" expanded="false" />
             <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
@@ -464,6 +558,7 @@
             <element signature="n#!!block;n#endRound#0" expanded="false" />
             <element signature="n#!!block;n#showScore#0" expanded="false" />
             <element signature="n#!!block;n#updateProtection#0" expanded="false" />
+            <element signature="n#!!block;n#updateEnemyHandInfo#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -472,7 +567,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
+          <folding>
+            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -507,42 +604,40 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.0">
-          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/love-letter-condensed.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="459" column="0" selection-start-line="459" selection-start-column="0" selection-end-line="469" selection-end-column="1" />
+          <caret line="501" column="0" selection-start-line="501" selection-start-column="0" selection-end-line="501" selection-end-column="0" />
+          <folding>
+            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simpleCanvas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6153846">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2841728">
-          <caret line="210" column="24" selection-start-line="210" selection-start-column="9" selection-end-line="210" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.7898383">
+          <caret line="289" column="20" selection-start-line="289" selection-start-column="4" selection-end-line="289" selection-end-column="20" />
           <folding>
-            <element signature="e#62#242#0" expanded="false" />
             <element signature="e#269#598#0" expanded="false" />
-            <element signature="n#!!block;n#stop#0" expanded="false" />
-            <element signature="n#!!block;n#tick#0" expanded="false" />
-            <element signature="e#5379#5455#0" expanded="false" />
-            <element signature="n#!!block;n#Deck#0" expanded="false" />
+            <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12699#12736#0" expanded="false" />
+            <element signature="e#12996#13033#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
-            <element signature="n#!!block;n#playBaron#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
+            <element signature="n#!!block;n#playKing#0" expanded="false" />
             <element signature="n#!!block;n#playCountess#0" expanded="false" />
             <element signature="n#!!block;n#playPrincess#0" expanded="false" />
             <element signature="n#!!block;n#chooseTarget#0" expanded="false" />
@@ -553,6 +648,7 @@
             <element signature="n#!!block;n#endRound#0" expanded="false" />
             <element signature="n#!!block;n#showScore#0" expanded="false" />
             <element signature="n#!!block;n#updateProtection#0" expanded="false" />
+            <element signature="n#!!block;n#updateEnemyHandInfo#0" expanded="false" />
           </folding>
         </state>
       </provider>

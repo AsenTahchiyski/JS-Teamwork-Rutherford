@@ -96,7 +96,7 @@ var myPlayer;
 window.onload = function main() {
     init();
     tick();
-    processAllRounds();
+    //processAllRounds();
 };
 
 function processAllRounds() {
@@ -211,6 +211,9 @@ function addElementToBoard(obj) {
 function handleImageLoad(image, obj) { //card
     var bitmap;
     stage.addChild(container);
+    if (obj instanceof Card && obj.owner !== myPlayer.name) {
+        image = 'resources/back.png';
+    }
     bitmap = new createjs.Bitmap(image);
     container.addChild(bitmap);
     bitmap.x = obj.position.x;
@@ -231,18 +234,18 @@ function handleImageLoad(image, obj) { //card
         this.parent.addChild(this);
         this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
         if (obj instanceof Deck) {
-            playerDrawCard(players[0]);
             if (obj.cards.length === 0) {
                 container.removeChild(this);
             }
+            playerDrawCard(myPlayer);
         } else {
             if (obj instanceof Card && obj.owner === myPlayer.name) {
-                this.object.isActive = true;
-                var activeCards = myPlayer.hand.filter(function(c) {
+                var activeCards = myPlayer.hand.filter(function (c) {
                     return c.isActive;
                 });
-                if(activeCards.length > 0) {
-                    if(activeCards[0].name !== 'Prince') {
+                this.object.isActive = true;
+                if (activeCards.length > 0) {
+                    if (activeCards[0].name !== 'Prince') {
                         activeCards[0].isActive = false;
                         this.object.isActive = true;
                     } else {
@@ -250,19 +253,19 @@ function handleImageLoad(image, obj) { //card
                         container.removeChild(activeCards[0].bitmap);
                     }
                 }
-                if(!this.object.requiresEnemy) {
-                    handlePlayerPlayCard(this.object);
+                if (!this.object.requiresEnemy) {
                     container.removeChild(activeCards[0].bitmap);
+                    handlePlayerPlayCard(this.object);
                 }
-            } else if(obj instanceof Card) {
+            } else if (obj instanceof Card) {
                 // TODO check if another card in hand is active
-                var activeCards = myPlayer.hand.filter(function(c) {
+                var activeCards = myPlayer.hand.filter(function (c) {
                     return c.isActive;
                 });
-                if(activeCards.length > 0) {
-                    if(activeCards[0].requiresEnemy && player !== myPlayer) {
-                        handlePlayerPlayCard(activeCards[0], player);
+                if (activeCards.length > 0) {
+                    if (activeCards[0].requiresEnemy && player !== myPlayer) {
                         container.removeChild(activeCards[0].bitmap);
+                        handlePlayerPlayCard(activeCards[0], player);
                     }
                 }
             }
@@ -296,14 +299,13 @@ function handlePlayerPlayCard(card, target) {
     // Remove card from player hand and add it to discard pile
     var playerIndex = card.owner.slice(-1) - 1;
     var player = players[playerIndex];
-    if(!player.isHuman) {
+    if (!player.isHuman) {
         target = chooseTarget(player, players);
     }
     var indexOfCard = 0;
     while (true) {
         if (players[playerIndex].hand[indexOfCard] === card) {
             players[playerIndex].hand.splice(indexOfCard, 1);
-            console.log(players[playerIndex].hand);
             card.owner = OWNERS.DISCARD;
             players[playerIndex].discardPile.push(card);
             break;
@@ -329,7 +331,15 @@ function handlePlayerPlayCard(card, target) {
     } else if (card.name === 'Princess') {
         playPrincess(player);
     }
+
+    if (target !== undefined && !target.isAlive) {
+        target.hand.forEach(function (card) {
+            container.removeChild(card.bitmap);
+        });
+    }
+    stage.update(event);
 }
+
 // Deck stuff
 function Deck(cards, position) {
     this.cards = cards;
@@ -347,10 +357,10 @@ function generateDeck() {
             deckCards.push(card);
         }
     }
-    var deckPosition = new Position(WIDTH - 250, HEIGHT - 300);
+    var deckPosition = new Position(WIDTH - 230, HEIGHT - 325);
     deckCards = shuffleDeck(deckCards);
     var deck = new Deck(deckCards, deckPosition);
-    deck.image = 'resources/deck.png';
+    deck.image = 'resources/back.png';
 
     return deck;
 }
@@ -377,7 +387,9 @@ function shuffleDeck(cards) {
 }
 
 function getCardFromDeck() {
-    return deck.cards.pop();
+    if (deck.cards.length >= 0) {
+        return deck.cards.pop();
+    }
 }
 
 // Player stuff
@@ -519,6 +531,7 @@ function playGuard(attacker, target) {
 function playPriest(attacker, target) {
     var enemyCard = target.hand[0];
     attacker.enemyHands[target.name] = enemyCard;
+    enemyCard.image = 'resources/cardFaces/' + enemyCard.value + '.jpg';
     console.log(attacker.name + ' now knows the card of ' + target.name);
     return true;
 }
@@ -691,6 +704,15 @@ function processRound(players) {
             cardToPlay = chooseCardToPlay(currentPlayer, targetPlayer);
         }
 
+        if (currentPlayer.isHuman) {
+            // TODO fix wait time
+
+            waitUserToResponse();
+            //
+            cardToPlay = chosenCard;
+            targetPlayer = chosenTarget;
+        }
+
         currentPlayer.hand.splice(currentPlayer.hand.indexOf(cardToPlay), 1);
         currentPlayer.discardPile.push(cardToPlay);
 
@@ -702,7 +724,7 @@ function processRound(players) {
 
         // log user turn
         if (targetPlayer == undefined) {
-            console.log(currentPlayer.name + ' has no effective action, discards ' + cardToPlay.name);
+            //console.log(currentPlayer.name + ' has no effective action, discards ' + cardToPlay.name);
         } else {
             console.log('--> ' + currentPlayer.name + ' plays ' + cardToPlay.name + ' against ' + targetPlayer.name);
 
@@ -834,4 +856,13 @@ function updateEnemyHandInfo(cardPlayed, player, players) {
         }
     });
     return true;
+}
+
+function waitUserToResponse() {
+    if (playerIsReady) {
+        playerIsReady = false;
+    } else {
+        console.log('shit');
+        setTimeout(waitUserToResponse, 1000);
+    }
 }
