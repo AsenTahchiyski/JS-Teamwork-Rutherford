@@ -35,6 +35,6 @@ node_modules
 
 
 # JetBrains WebStorm configuration folder
-.idea
+.idea/
 
 
