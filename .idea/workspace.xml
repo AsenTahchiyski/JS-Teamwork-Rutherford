@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ec0e429-8092-48c0-b395-7c6f1cdd47a4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/simpleCanvas.js" afterPath="$PROJECT_DIR$/scripts/simpleCanvas.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Teamwork-Rutherford.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,7 +39,7 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="501" column="0" selection-start-line="501" selection-start-column="0" selection-end-line="501" selection-end-column="0" />
               <folding>
-                <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+                <marker date="1453916403023" expanded="true" signature="14749:14751" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -48,8 +48,8 @@
       <file leaf-file-name="simpleCanvas.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.5796766">
-              <caret line="339" column="17" selection-start-line="339" selection-start-column="17" selection-end-line="339" selection-end-column="17" />
+            <state vertical-scroll-proportion="-0.09930716">
+              <caret line="534" column="31" selection-start-line="534" selection-start-column="31" selection-end-line="534" selection-end-column="31" />
               <folding>
                 <element signature="e#269#598#0" expanded="false" />
                 <element signature="e#5381#5457#0" expanded="false" />
@@ -346,7 +346,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="501" column="0" selection-start-line="501" selection-start-column="0" selection-end-line="501" selection-end-column="0" />
           <folding>
-            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+            <marker date="1453916403023" expanded="true" signature="14749:14751" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -392,7 +392,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="452" column="0" selection-start-line="452" selection-start-column="0" selection-end-line="452" selection-end-column="0" />
           <folding>
-            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+            <marker date="1453916403023" expanded="true" signature="14749:14751" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -474,7 +474,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="494" column="45" selection-start-line="479" selection-start-column="0" selection-end-line="494" selection-end-column="45" />
           <folding>
-            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+            <marker date="1453916403023" expanded="true" signature="14749:14751" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -520,7 +520,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="1" selection-start-line="23" selection-start-column="0" selection-end-line="41" selection-end-column="1" />
           <folding>
-            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+            <marker date="1453916403023" expanded="true" signature="14749:14751" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -566,7 +566,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
           <folding>
-            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+            <marker date="1453916403023" expanded="true" signature="14749:14751" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -610,7 +610,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="501" column="0" selection-start-line="501" selection-start-column="0" selection-end-line="501" selection-end-column="0" />
           <folding>
-            <marker date="1453838312339" expanded="true" signature="14749:14751" placeholder="{...}" />
+            <marker date="1453916403023" expanded="true" signature="14749:14751" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -625,8 +625,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5796766">
-          <caret line="339" column="17" selection-start-line="339" selection-start-column="17" selection-end-line="339" selection-end-column="17" />
+        <state vertical-scroll-proportion="-0.09930716">
+          <caret line="534" column="31" selection-start-line="534" selection-start-column="31" selection-end-line="534" selection-end-column="31" />
           <folding>
             <element signature="e#269#598#0" expanded="false" />
             <element signature="e#5381#5457#0" expanded="false" />
