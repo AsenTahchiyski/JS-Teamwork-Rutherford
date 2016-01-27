@@ -249,13 +249,13 @@ function handleImageLoad(image, obj) { //card
                         activeCards[0].isActive = false;
                         this.object.isActive = true;
                     } else {
-                        handlePlayerPlayCard(activeCards[0], myPlayer);
                         container.removeChild(activeCards[0].bitmap);
+                        handlePlayerPlayCard(activeCards[0], myPlayer);
                     }
                 }
                 if (!this.object.requiresEnemy) {
-                    container.removeChild(activeCards[0].bitmap);
                     handlePlayerPlayCard(this.object);
+                    container.removeChild(activeCards[0].bitmap);
                 }
             } else if (obj instanceof Card) {
                 // TODO check if another card in hand is active
@@ -264,8 +264,8 @@ function handleImageLoad(image, obj) { //card
                 });
                 if (activeCards.length > 0) {
                     if (activeCards[0].requiresEnemy && player !== myPlayer) {
-                        container.removeChild(activeCards[0].bitmap);
                         handlePlayerPlayCard(activeCards[0], player);
+                        container.removeChild(activeCards[0].bitmap);
                     }
                 }
             }
