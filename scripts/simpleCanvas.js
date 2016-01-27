@@ -91,11 +91,12 @@ var update;
 var deck, players;
 var backupCard;
 var container;
-var myPlayer;
+var selectedPlayer;
+var theEnemy;
 
 window.onload = function main() {
     init();
-    tick();
+    //tick();
     processAllRounds();
 };
 
@@ -104,6 +105,7 @@ function processAllRounds() {
     var roundWinner;
     var roundCounter = 1;
     do {
+        tick();
         console.log('<<< ROUND ' + roundCounter + ' >>>');
         roundWinner = processRound(players);
         roundCounter++;
@@ -190,13 +192,14 @@ function Card(value, name, description, owner, position, requiresEnemy) {
     this.image = null;
     this.isActive = false;
     this.requiresEnemy = requiresEnemy;
-    //this.previousArrayIndex = null;
-    //this.isHovered = false;
+    this.toString = function () {
+        return '(' + this.value + ')' + this.name + ': ' + this.description;
+    };
 }
 
-Card.prototype.toString = function () {
-    return '(' + this.value + ')' + this.name + ': ' + this.description;
-};
+//Card.prototype.toString = function () {
+//    return '(' + this.value + ')' + this.name + ': ' + this.description;
+//};
 
 function addElementToBoard(obj) {
     var picture = obj.image;
@@ -236,9 +239,9 @@ function handleImageLoad(image, obj) { //card
                 container.removeChild(this);
             }
         } else {
-            if (obj instanceof Card && obj.owner === myPlayer.name) {
+            if (obj instanceof Card && obj.owner === selectedPlayer.name) {
                 this.object.isActive = true;
-                var activeCards = myPlayer.hand.filter(function(c) {
+                var activeCards = selectedPlayer.hand.filter(function(c) {
                     return c.isActive;
                 });
                 if(activeCards.length > 0) {
@@ -246,21 +249,22 @@ function handleImageLoad(image, obj) { //card
                         activeCards[0].isActive = false;
                         this.object.isActive = true;
                     } else {
-                        handlePlayerPlayCard(activeCards[0], myPlayer);
+                        handlePlayerPlayCard(activeCards[0], selectedPlayer);
                         container.removeChild(activeCards[0].bitmap);
                     }
                 }
+
                 if(!this.object.requiresEnemy) {
                     handlePlayerPlayCard(this.object);
                     container.removeChild(activeCards[0].bitmap);
                 }
             } else if(obj instanceof Card) {
                 // TODO check if another card in hand is active
-                var activeCards = myPlayer.hand.filter(function(c) {
+                var activeCards = selectedPlayer.hand.filter(function(c) {
                     return c.isActive;
                 });
                 if(activeCards.length > 0) {
-                    if(activeCards[0].requiresEnemy && player !== myPlayer) {
+                    if(activeCards[0].requiresEnemy && player !== selectedPlayer) {
                         handlePlayerPlayCard(activeCards[0], player);
                         container.removeChild(activeCards[0].bitmap);
                     }
@@ -274,7 +278,6 @@ function handleImageLoad(image, obj) { //card
         this.scaleX = this.scaleY = this.scale * 1.1;
         update = true;
     });
-
 
     //card.image = bitmap;
 
@@ -299,6 +302,7 @@ function handlePlayerPlayCard(card, target) {
     if(!player.isHuman) {
         target = chooseTarget(player, players);
     }
+
     var indexOfCard = 0;
     while (true) {
         if (players[playerIndex].hand[indexOfCard] === card) {
@@ -397,7 +401,7 @@ function initializePlayers(count) {
     players = [];
     var isHuman = false;
     for (var i = 1; i <= count; i++) {
-        isHuman = i === 1 ? true : false;
+        isHuman = i === 1;
         var player = new Player('Player' + i, isHuman);
         var card = getCardFromDeck();
         card.owner = player.name;
@@ -415,7 +419,7 @@ function initializePlayers(count) {
         players.push(player);
     }
 
-    myPlayer = players[0]; // should be edited for multi
+    selectedPlayer = players[0]; // should be edited for multi
     return players;
 }
 
@@ -490,6 +494,7 @@ function playGuard(attacker, target) {
             }
         });
         if (totalGuards == possibleCards.length) {
+            console.log('no target, only Guards left');
             return;
         }
         if (isNaN(guess) || possibleCards[guess] == undefined) {
@@ -691,6 +696,8 @@ function processRound(players) {
             cardToPlay = chooseCardToPlay(currentPlayer, targetPlayer);
         }
 
+        // TODO: if player is human, cardToPlay is null, to be changed
+
         currentPlayer.hand.splice(currentPlayer.hand.indexOf(cardToPlay), 1);
         currentPlayer.discardPile.push(cardToPlay);
 
@@ -822,6 +829,7 @@ function updateProtection(player) {
 
 function selectEnemy() {
     return players[1];
+    // TODO: not ok
 }
 
 function updateEnemyHandInfo(cardPlayed, player, players) {
