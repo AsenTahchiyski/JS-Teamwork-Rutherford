@@ -337,7 +337,7 @@ function handlePlayerPlayCard(card, target) {
             container.removeChild(card.bitmap);
         });
     }
-    stage.update(event);
+    stage.update();
 }
 
 // Deck stuff

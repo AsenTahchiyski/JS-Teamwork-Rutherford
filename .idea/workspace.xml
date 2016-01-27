@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ec0e429-8092-48c0-b395-7c6f1cdd47a4" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/deck.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/simpleCanvas.js" afterPath="$PROJECT_DIR$/scripts/simpleCanvas.js" />
     </list>
     <ignored path="Teamwork-Rutherford.iws" />
@@ -50,14 +48,14 @@
       <file leaf-file-name="simpleCanvas.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7898383">
-              <caret line="289" column="20" selection-start-line="289" selection-start-column="4" selection-end-line="289" selection-end-column="20" />
+            <state vertical-scroll-proportion="-3.5796766">
+              <caret line="339" column="17" selection-start-line="339" selection-start-column="17" selection-end-line="339" selection-end-column="17" />
               <folding>
                 <element signature="e#269#598#0" expanded="false" />
                 <element signature="e#5381#5457#0" expanded="false" />
                 <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
                 <element signature="n#!!block;n#Player#0" expanded="false" />
-                <element signature="e#12996#13033#0" expanded="false" />
+                <element signature="e#12991#13028#0" expanded="false" />
                 <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
                 <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
                 <element signature="n#!!block;n#playKing#0" expanded="false" />
@@ -362,7 +360,7 @@
             <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12996#13033#0" expanded="false" />
+            <element signature="e#12991#13028#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
             <element signature="n#!!block;n#playKing#0" expanded="false" />
@@ -408,7 +406,7 @@
             <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12996#13033#0" expanded="false" />
+            <element signature="e#12991#13028#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
             <element signature="n#!!block;n#playKing#0" expanded="false" />
@@ -452,7 +450,7 @@
             <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12996#13033#0" expanded="false" />
+            <element signature="e#12991#13028#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
             <element signature="n#!!block;n#playKing#0" expanded="false" />
@@ -498,7 +496,7 @@
             <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12996#13033#0" expanded="false" />
+            <element signature="e#12991#13028#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
             <element signature="n#!!block;n#playKing#0" expanded="false" />
@@ -544,7 +542,7 @@
             <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12996#13033#0" expanded="false" />
+            <element signature="e#12991#13028#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
             <element signature="n#!!block;n#playKing#0" expanded="false" />
@@ -627,14 +625,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/simpleCanvas.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7898383">
-          <caret line="289" column="20" selection-start-line="289" selection-start-column="4" selection-end-line="289" selection-end-column="20" />
+        <state vertical-scroll-proportion="-3.5796766">
+          <caret line="339" column="17" selection-start-line="339" selection-start-column="17" selection-end-line="339" selection-end-column="17" />
           <folding>
             <element signature="e#269#598#0" expanded="false" />
             <element signature="e#5381#5457#0" expanded="false" />
             <element signature="n#!!block;n#shuffleDeck#0" expanded="false" />
             <element signature="n#!!block;n#Player#0" expanded="false" />
-            <element signature="e#12996#13033#0" expanded="false" />
+            <element signature="e#12991#13028#0" expanded="false" />
             <element signature="n#!!block;n#getDiscardPile#0" expanded="false" />
             <element signature="n#!!block;n#playHandmaid#0" expanded="false" />
             <element signature="n#!!block;n#playKing#0" expanded="false" />
