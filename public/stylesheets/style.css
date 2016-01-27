@@ -46,3 +46,17 @@ canvas {
     position: static;
     display: block;
 }
+
+nav {
+    position: absolute;
+    top: 650px;
+}
+
+a {
+    color: black;
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+}
