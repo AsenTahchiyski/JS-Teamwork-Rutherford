@@ -85,6 +85,35 @@ var CARDS = {
     }
 };
 
+// Player stuff
+function Player(name, isHuman) {
+    this.name = name;
+    this.hand = [];
+    this.discardPile = [];
+    this.points = 0;
+    this.isAlive = true;
+    this.isProtected = false;
+    this.enemyHands = {};
+    this.position = givePlayerPositionByID(name);
+    this.isHuman = isHuman;
+}
+
+// Main elements
+
+//Card stuff
+function Card(value, name, description, owner, position, requiresEnemy) {
+    this.value = value;
+    this.name = name;
+    this.description = description;
+    this.owner = owner;
+    this.position = position;
+    this.image = null;
+    this.isActive = false;
+    this.requiresEnemy = requiresEnemy;
+    //this.previousArrayIndex = null;
+    //this.isHovered = false;
+}
+
 var canvas, stage;
 var offset;
 var update;
@@ -159,15 +188,18 @@ function stop() {
 }
 
 function renderPlayers() {
+	canvas.width+=0;
     players.forEach(function (player) {
         var i = 0;
-        player.hand.forEach(function (card) {
-            card.position = new Position(player.position.x, player.position.y);
-            card.position.x += i * 40;
-            card.position.y += i * 40;
-            addElementToBoard(card);
-            i++;
-        });
+		if(player.isAlive){
+			player.hand.forEach(function (card) {
+				card.position = new Position(player.position.x, player.position.y);
+				card.position.x += i * 40;
+				card.position.y += i * 40;
+				addElementToBoard(card);
+				i++;
+			});
+		}
     });
 }
 
@@ -176,22 +208,6 @@ function tick(event) {
         update = false; // only update once
         stage.update(event);
     }
-}
-
-// Main elements
-
-//Card stuff
-function Card(value, name, description, owner, position, requiresEnemy) {
-    this.value = value;
-    this.name = name;
-    this.description = description;
-    this.owner = owner;
-    this.position = position;
-    this.image = null;
-    this.isActive = false;
-    this.requiresEnemy = requiresEnemy;
-    //this.previousArrayIndex = null;
-    //this.isHovered = false;
 }
 
 Card.prototype.toString = function () {
@@ -230,6 +246,7 @@ function handleImageLoad(image, obj) { //card
 
     bitmap.object = obj;
     obj.bitmap = bitmap;
+	
     bitmap.on('mousedown', function (evt) {
         this.parent.addChild(this);
         this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
@@ -270,8 +287,9 @@ function handleImageLoad(image, obj) { //card
                 }
             }
         }
-        update = true;
+        stage.update();
     });
+	
     bitmap.on('rollover', function (evt) {
         this.parent.addChild(this);
         this.scaleX = this.scaleY = this.scale * 1.1;
@@ -331,12 +349,12 @@ function handlePlayerPlayCard(card, target) {
     } else if (card.name === 'Princess') {
         playPrincess(player);
     }
-
-    if (target !== undefined && !target.isAlive) {
-        target.hand.forEach(function (card) {
-            container.removeChild(card.bitmap);
-        });
-    }
+	
+	container.removeAllChildren();
+	renderPlayers();
+	generateDeck();
+	addElementToBoard(deck);
+	
     stage.update();
 }
 
@@ -390,19 +408,6 @@ function getCardFromDeck() {
     if (deck.cards.length >= 0) {
         return deck.cards.pop();
     }
-}
-
-// Player stuff
-function Player(name, isHuman) {
-    this.name = name;
-    this.hand = [];
-    this.discardPile = [];
-    this.points = 0;
-    this.isAlive = true;
-    this.isProtected = false;
-    this.enemyHands = {};
-    this.position = givePlayerPositionByID(name);
-    this.isHuman = isHuman;
 }
 
 function initializePlayers(count) {
@@ -482,49 +487,75 @@ function playGuard(attacker, target) {
     var discardPile = getDiscardPile(players);
     var possibleCards = getPossibleEnemyCards(discardPile, attacker.hand);
     var somethingWrongCounter = 0;
-    do {
-        if (target === undefined) { // no useful action
-            console.log('no target, Guard is drunk');
-            return;
-        }
+	if(attacker.isHuman){
+		guess = prompt("Your choice: ");
+		var validValue = false;
+		
+		for(var property in CARDS) {
+		   	if(CARDS[property].name == guess){
+				validValue = true;
+			}
+		}
+		
+		if(!validValue){
+			return false;
+		}
+		
+		if (guess == target.hand[0].name) {
+			target.isAlive = false;
+			console.log(target.name + ' is out of the round');
+		} else {
+			console.log(attacker.name + ' guessed ' + guess + ', not correct');
+		}
+	
+		
+	}
+	else
+	{
+		do {
+			if (target === undefined) { // no useful action
+				console.log('no target, Guard is drunk');
+				return;
+			}
 
-        if (attacker.enemyHands[target.name] != undefined && attacker.enemyHands[target.name].length > 0) {
-            guess = Math.floor(Math.random() * (attacker.enemyHands[target.name].length - 1)); // random so far
-        } else {
-            guess = Math.floor(Math.random() * (possibleCards.length - 1));
-        }
+			if (attacker.enemyHands[target.name] != undefined && attacker.enemyHands[target.name].length > 0) {
+				guess = Math.floor(Math.random() * (attacker.enemyHands[target.name].length - 1)); // random so far
+			} else {
+				guess = Math.floor(Math.random() * (possibleCards.length - 1));
+			}
 
-        // check if only guards are left
-        var totalGuards = 0;
-        possibleCards.forEach(function (c) {
-            if (c.value == 1) {
-                totalGuards++;
-            }
-        });
-        if (totalGuards == possibleCards.length) {
-            return;
-        }
-        if (isNaN(guess) || possibleCards[guess] == undefined) {
-            console.log('!-- guess = NaN || possibleCards[guess] == undefined');
-            return;
-        }
+			// check if only guards are left
+			var totalGuards = 0;
+			possibleCards.forEach(function (c) {
+				if (c.value == 1) {
+					totalGuards++;
+				}
+			});
+			if (totalGuards == possibleCards.length) {
+				return;
+			}
+			if (isNaN(guess) || possibleCards[guess] == undefined) {
+				console.log('!-- guess = NaN || possibleCards[guess] == undefined');
+				return;
+			}
 
-        somethingWrongCounter++;
-        if (somethingWrongCounter > 15) {
-            possibleCards.sort(function (a, b) {
-                return a.value > b.value;
-            });
-            guess = possibleCards.length - 1;
-        }
-    } while (possibleCards[guess].value == 1);
-
-    if (guess == target.hand[0].value) {
-        target.isAlive = false;
-        console.log(target.name + ' is out of the round');
-    } else {
-        console.log(attacker.name + ' guessed ' + possibleCards[guess].name + ', not correct');
-    }
-
+			somethingWrongCounter++;
+			if (somethingWrongCounter > 15) {
+				possibleCards.sort(function (a, b) {
+					return a.value > b.value;
+				});
+				guess = possibleCards.length - 1;
+			}
+		} while (possibleCards[guess].value == 1);
+		
+		if (guess == target.hand[0].value) {
+			target.isAlive = false;
+			console.log(target.name + ' is out of the round');
+		} else 
+		{
+			console.log(attacker.name + ' guessed ' + possibleCards[guess].name + ', not correct');
+		}
+	}	
     return true;
 }
 
@@ -533,6 +564,9 @@ function playPriest(attacker, target) {
     attacker.enemyHands[target.name] = enemyCard;
     enemyCard.image = 'resources/cardFaces/' + enemyCard.value + '.jpg';
     console.log(attacker.name + ' now knows the card of ' + target.name);
+	target.hand[0] = enemyCard;
+	console.log('The enemy card is ' + enemyCard.name + '.');
+	
     return true;
 }
 
