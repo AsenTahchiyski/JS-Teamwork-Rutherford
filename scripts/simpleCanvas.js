@@ -109,6 +109,7 @@ function Card(value, name, description, owner, position, requiresEnemy) {
     this.position = position;
     this.image = null;
     this.isActive = false;
+	this.isShown = false;
     this.requiresEnemy = requiresEnemy;
     //this.previousArrayIndex = null;
     //this.isHovered = false;
@@ -228,7 +229,12 @@ function handleImageLoad(image, obj) { //card
     var bitmap;
     stage.addChild(container);
     if (obj instanceof Card && obj.owner !== myPlayer.name) {
-        image = 'resources/back.png';
+		if(obj.isShown){
+			image = 'resources/cardFaces/' + obj.value + '.jpg';	
+		}
+		else{
+        	image = 'resources/back.png';
+		}	
     }
     bitmap = new createjs.Bitmap(image);
     container.addChild(bitmap);
@@ -564,7 +570,8 @@ function playPriest(attacker, target) {
     attacker.enemyHands[target.name] = enemyCard;
     enemyCard.image = 'resources/cardFaces/' + enemyCard.value + '.jpg';
     console.log(attacker.name + ' now knows the card of ' + target.name);
-	target.hand[0] = enemyCard;
+	target.hand[0].isShown = true;
+	
 	console.log('The enemy card is ' + enemyCard.name + '.');
 	
     return true;
